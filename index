@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i.lec - Intelligent Learning Empathetic Caregiver</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-heading { font-family: 'Poppins', sans-serif; }
+        .font-body { font-family: 'Lato', sans-serif; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .legal-content {
+            max-width: 4xl;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .legal-content h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: #1E7875;
+            margin-bottom: 1.5rem;
+        }
+        
+        .legal-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1E7875;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .legal-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .legal-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .legal-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .jotform-feedback-button-container {
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ilec-primary': '#1E7875',
+                        'ilec-secondary': '#F5E4C3',
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+        
+        // Initialize Lucide Icons and page navigation
+        window.addEventListener('DOMContentLoaded', (event) => {
+            lucide.createIcons();
+            
+            // Set up page navigation
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('[data-page]');
+            const navButton = document.getElementById('nav-button');
+            
+            // Show home page by default
+            showPage('home');
+            
+            // Add event listeners to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+                    showPage(pageId);
+                    
+                    // Update URL without page reload
+                    window.history.pushState({}, '', `#${pageId}`);
+                });
+            });
+            
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', () => {
+                const hash = window.location.hash.substring(1) || 'home';
+                showPage(hash);
+            });
+            
+            // Check for hash on initial load
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                showPage(hash);
+            }
+            
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show selected page
+                const activePage = document.getElementById(`${pageId}-page`);
+                if (activePage) {
+                    activePage.classList.add('active');
+                } else {
+                    // Fallback to home page if page doesn't exist
+                    document.getElementById('home-page').classList.add('active');
+                }
+                
+                // Update navigation button based on current page
+                if (pageId === 'privacy' || pageId === 'terms') {
+                    navButton.innerHTML = 'Home';
+                    navButton.setAttribute('data-page', 'home');
+                } else {
+                    navButton.innerHTML = 'Get Started';
+                    navButton.removeAttribute('data-page');
+                    navButton.setAttribute('href', '#contact');
+                }
+                
+                // Scroll to top when changing pages
+                window.scrollTo(0, 0);
+            }
+        });
+    </script>
+</head>
+<body class="font-body bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-10 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="text-2xl font-heading text-ilec-primary font-black cursor-pointer" data-page="home">
+                i.lec
+            </div>
+            <a id="nav-button" href="#contact" class="px-4 py-2 bg-ilec-primary text-white rounded-full text-sm font-semibold hover:bg-ilec-primary/90 transition-colors shadow-md">
+                Get Started
+            </a>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <main>
+            <!-- Hero Section -->
+            <section class="bg-ilec-secondary py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-heading font-extrabold text-ilec-primary mb-6 leading-tight">
+                        Intelligent Learning Empathetic Caregiver
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-semibold text-gray-700 max-w-3xl mx-auto mb-8">
+                        "We've Got You. Here for your healing, not just your hustle."
+                    </p>
+                    <div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-xl">
+                        <h2 class="text-3xl font-heading font-bold text-ilec-primary mb-4">Our Mission</h2>
+                        <p class="text-lg text-gray-700">
+                            Empowering individuals with effective stress management tools to reduce growing mental health concerns in our community.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vision Section -->
+            <section class="py-16 sm:py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                        <div class="lg:col-span-6">
+                            <span class="inline-block px-4 py-1 mb-4 text-sm font-semibold rounded-full bg-ilec-primary text-white">OUR VISION</span>
+                            <h2 class="text-4xl font-heading font-bold text-gray-900 mb-6">
+                                A World Where Mental Wellbeing is Non-Negotiable
+                            </h2>
+                            <p class="text-xl text-gray-600 mb-6">
+                                i.lec's vision is to create a world where individuals can <b>thrive emotionally and mentally</b>, free from the burdens of stress and anxiety, by providing accessible, daily, AI-powered support.
+                            </p>
+                            <ul class="space-y-3 text-lg text-gray-700 font-semibold">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ilec-primary mr-3"></i> Normalize emotional well-being.</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ilec-primary mr-3"></i> Offer preventive, not just reactive, care.</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ilec-primary mr-3"></i> Empower the community with accessible tools.</li>
+                            </ul>
+                        </div>
+
+                        <div class="lg:col-span-6 p-10 bg-ilec-primary rounded-xl shadow-2xl lg:translate-y-8">
+                            <div class="flex flex-col items-center text-center text-white">
+                                <i data-lucide="sun" class="w-16 h-16 text-ilec-secondary mb-4"></i>
+                                <h3 class="text-3xl font-heading font-extrabold mb-3 leading-snug">
+                                    Your Pocket Zen Master
+                                </h3>
+                                <p class="text-xl font-light italic">
+                                    "i.lec is not just a system; it's your <b>pocket Zen master</b>, your <b>stress sabbatical</b>. Wave goodbye to those nerve-racking nights and hello to a serenity-filled life."
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-16 sm:py-24 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-center text-4xl font-heading font-bold text-gray-900 mb-12">
+                        i.lec - Your Comprehensive Stress Management System
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
+                            <i data-lucide="mic" class="w-8 h-8 text-ilec-primary mb-3"></i>
+                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Talk and Get Support</h3>
+                            <p class="text-gray-600">
+                                <b>AI Vocal Assistant:</b> Get empathetic, voice-based interaction for immediate support, especially during peak stress hours (evenings).
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
+                            <i data-lucide="clipboard-list" class="w-8 h-8 text-ilec-primary mb-3"></i>
+                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Strategies Just For You</h3>
+                            <p class="text-gray-600">
+                                <b>Personalized Management:</b> Receive tailored strategies based on your unique needs and preferences, and continuously adapt to your progress.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
+                            <i data-lucide="message-square" class="w-8 h-8 text-ilec-primary mb-3"></i>
+                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Always Here to Help</h3>
+                            <p class="text-gray-600">
+                                <b>24/7 Chatbot System:</b> Access instant, non-judgmental support, mental health resources, and information anytime, anywhere.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
+                            <i data-lucide="book-open-text" class="w-8 h-8 text-ilec-primary mb-3"></i>
+                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Wellness at Your Fingertips</h3>
+                            <p class="text-gray-600">
+                                <b>Resource Library:</b> Browse a library of curated content for effective stress management and mental wellness. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Audience & Partnerships Section -->
+            <section class="py-16 sm:py-24 bg-ilec-secondary">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div class="bg-white p-8 rounded-xl shadow-xl">
+                            <h3 class="text-3xl font-heading font-bold text-ilec-primary mb-6 flex items-center">
+                                <i data-lucide="users" class="w-6 h-6 mr-3"></i> Who We Serve
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-4">Our focus is on individuals in high-stress situations, with the 31-50 age group being the most affected demographic seeking support.</p>
+                            <ul class="space-y-4 text-lg text-gray-700">
+                                <li class="flex items-start"><i data-lucide="briefcase" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Working Professionals in high-stress environments</li>
+                                <li class="flex items-start"><i data-lucide="graduation-cap" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> University and college Students</li>
+                                <li class="flex items-start"><i data-lucide="heart-handshake" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Caregivers and frontline workers</li>
+                                <li class="flex items-start"><i data-lucide="heart-pulse" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Patients with chronic health conditions</li>
+                                <li class="flex items-start"><i data-lucide="trending-up" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Individuals experiencing life transitions</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-xl">
+                            <h3 class="text-3xl font-heading font-bold text-ilec-primary mb-6 flex items-center">
+                                <i data-lucide="link" class="w-6 h-6 mr-3"></i> Strategic Growth & Partnerships
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-4">We are actively seeking collaborations to integrate our AI-driven platform into the broader community.</p>
+                            <ul class="space-y-4 text-lg text-gray-700">
+                                <li class="flex items-start"><i data-lucide="building" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Corporate and institutional partnerships</li>
+                                <li class="flex items-start"><i data-lucide="monitor" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Premium subscription accounts</li>
+                                <li class="flex items-start"><i data-lucide="globe" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Integration with existing platforms such as BruHealth</li>
+                                <li class="flex items-start"><i data-lucide="hand-heart" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Government health initiatives and international health organization affiliations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Privacy Policy Page -->
+    <div id="privacy-page" class="page">
+        <section class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="legal-content">
+                    <h1 class="text-4xl font-heading font-bold text-ilec-primary mb-6">Privacy Policy</h1>
+                    <p class="text-gray-600 mb-6"><strong>Last updated: October 2025</strong></p>
+                    
+                    <p class="mb-6">At i.lec, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you interact with our platform.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Information We Collect</h2>
+                    <p class="mb-4">We may collect the following types of information:</p>
+                    <ul class="list-disc pl-6 mb-6">
+                        <li><strong>Personal Information:</strong> such as your name, email address, or account details if you choose to register.</li>
+                        <li><strong>Wellness Data:</strong> responses or emotional signals you share with our tools, stored securely and anonymized whenever possible.</li>
+                        <li><strong>Usage Information:</strong> technical details like browser type, device, and IP address to improve site performance.</li>
+                    </ul>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">How We Use Your Information</h2>
+                    <p class="mb-4">Your information helps us to:</p>
+                    <ul class="list-disc pl-6 mb-6">
+                        <li>Provide and personalize your experience on i.lec</li>
+                        <li>Improve our tools, features, and services</li>
+                        <li>Ensure platform security and prevent misuse</li>
+                        <li>Communicate important updates or support</li>
+                    </ul>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Data Security</h2>
+                    <p class="mb-6">We implement strict measures to protect your data from unauthorized access, alteration, or disclosure. Sensitive data is encrypted both in transit and at rest.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Third-Party Services</h2>
+                    <p class="mb-6">We may use trusted third-party providers (e.g., hosting, analytics, AI APIs) to help deliver our services. These providers are bound by strict data protection obligations.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Your Rights</h2>
+                    <p class="mb-6">You have the right to access, correct, or request deletion of your personal data. To exercise these rights, contact us at <a href="mailto:talktoilec@gmail.com" class="text-ilec-primary hover:underline">talktoilec@gmail.com</a>.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Changes to This Policy</h2>
+                    <p class="mb-6">We may update this Privacy Policy as our services evolve. Updates will always be posted here with a new "last updated" date.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Contact Us</h2>
+                    <p class="mb-6">If you have any questions about this Privacy Policy, reach out to us at <a href="mailto:talktoilec@gmail.com" class="text-ilec-primary hover:underline">talktoilec@gmail.com</a>.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Terms of Service Page -->
+    <div id="terms-page" class="page">
+        <section class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="legal-content">
+                    <h1 class="text-4xl font-heading font-bold text-ilec-primary mb-6">Terms of Service</h1>
+                    <p class="text-gray-600 mb-6"><strong>Last updated: October 2025</strong></p>
+                    
+                    <p class="mb-6">Welcome to i.lec. By accessing or using our platform, you agree to the following Terms of Service. Please read them carefully.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">1. Acceptance of Terms</h2>
+                    <p class="mb-6">By using i.lec, you confirm that you are at least 16 years old (or have parental consent where required) and agree to these terms. If you do not agree, you must stop using the platform.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">2. Our Services</h2>
+                    <p class="mb-6">i.lec provides digital wellness tools, AI-driven reflections, and resources for mental health awareness. Our platform is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">3. User Responsibilities</h2>
+                    <ul class="list-disc pl-6 mb-6">
+                        <li>You agree to use i.lec only for lawful purposes.</li>
+                        <li>You are responsible for the accuracy of any information you provide.</li>
+                        <li>You must not misuse the platform by attempting to hack, disrupt, or exploit it.</li>
+                    </ul>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">4. Privacy</h2>
+                    <p class="mb-6">Your use of i.lec is also governed by our Privacy Policy, which explains how we collect and use your data.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">5. Intellectual Property</h2>
+                    <p class="mb-6">All content, branding, and design elements of i.lec are owned by us or licensed to us. You may not copy, modify, or redistribute them without permission.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">6. Third-Party Services</h2>
+                    <p class="mb-6">We may integrate trusted third-party services (e.g., analytics, hosting, AI APIs). Their use is governed by their own terms and policies.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">7. Disclaimer of Warranties</h2>
+                    <p class="mb-6">i.lec is provided on an "as is" and "as available" basis. We make no guarantees that the service will be uninterrupted, error-free, or meet all user expectations.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">8. Limitation of Liability</h2>
+                    <p class="mb-6">To the fullest extent permitted by law, i.lec is not liable for any indirect, incidental, or consequential damages arising from your use of the platform.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">9. Changes to Terms</h2>
+                    <p class="mb-6">We may update these Terms of Service at any time. The updated version will always be posted here with the revised "last updated" date.</p>
+                    
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">10. Contact</h2>
+                    <p class="mb-6">If you have questions about these Terms, contact us at <a href="mailto:talktoilec@gmail.com" class="text-ilec-primary hover:underline">talktoilec@gmail.com</a>.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer with Contact Section -->
+    <footer id="contact" class="bg-gray-900 py-12 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-heading font-bold text-ilec-secondary mb-4">Contact i.lec</h2>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                Ready to integrate the future of preventive stress management? Get in touch with our team.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-8 text-lg mb-8">
+                <div class="flex items-center">
+                    <i data-lucide="mail" class="w-5 h-5 text-ilec-primary mr-2"></i>
+                    <span class="mr-2">Email us:</span>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=talktoilec@gmail.com&su=Inquiry%20about%20i.lec" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="text-ilec-secondary hover:text-ilec-primary transition-colors font-semibold">
+                       talktoilec@gmail.com
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-ilec-primary mr-2"></i>
+                    <span>Based in Brunei Darussalam</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" data-page="privacy" class="text-ilec-secondary hover:text-ilec-primary transition-colors">Privacy Policy</a>
+                <a href="#" data-page="terms" class="text-ilec-secondary hover:text-ilec-primary transition-colors">Terms of Service</a>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-700">
+                <p class="text-sm text-gray-500">&copy; 2025 i.lec. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jotfor.ms/agent/embedjs/019acd5776837c49abeff8a03175884d48ea/embed.js"></script>
+</body>
+</html>
