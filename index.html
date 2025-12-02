@@ -132,14 +132,22 @@
                     document.getElementById('home-page').classList.add('active');
                 }
                 
-                // Update navigation button based on current page
+                // EDITED: Update navigation button to open Google Form when on home page
+                // and show Home button when on legal pages
                 if (pageId === 'privacy' || pageId === 'terms') {
                     navButton.innerHTML = 'Home';
                     navButton.setAttribute('data-page', 'home');
+                    navButton.removeAttribute('target');
+                    navButton.removeAttribute('rel');
+                    navButton.setAttribute('href', '#');
                 } else {
-                    navButton.innerHTML = 'Get Started';
+                    // EDITED: Changed button text to be more inviting for feedback
+                    navButton.innerHTML = 'Share Your Thoughts';
+                    // EDITED: Updated to the new feedback form link
+                    navButton.setAttribute('href', 'https://forms.gle/SG6u5WKaQZvhB6ju9');
+                    navButton.setAttribute('target', '_blank');
+                    navButton.setAttribute('rel', 'noopener noreferrer');
                     navButton.removeAttribute('data-page');
-                    navButton.setAttribute('href', '#contact');
                 }
                 
                 // Scroll to top when changing pages
@@ -156,8 +164,9 @@
             <div class="text-2xl font-heading text-ilec-primary font-black cursor-pointer" data-page="home">
                 i.lec
             </div>
-            <a id="nav-button" href="#contact" class="px-4 py-2 bg-ilec-primary text-white rounded-full text-sm font-semibold hover:bg-ilec-primary/90 transition-colors shadow-md">
-                Get Started
+            <!-- EDITED: Updated button text and link to feedback form -->
+            <a id="nav-button" href="https://forms.gle/SG6u5WKaQZvhB6ju9" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-ilec-primary text-white rounded-full text-sm font-semibold hover:bg-ilec-primary/90 transition-colors shadow-md hover:shadow-lg">
+                Share Your Thoughts
             </a>
         </div>
     </nav>
