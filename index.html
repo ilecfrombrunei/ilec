@@ -286,6 +286,111 @@
             color: #6b7280;
             line-height: 1.4;
         }
+
+        /* Floating Navigation Panel Styles */
+        .floating-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: none;
+        }
+
+        .floating-nav.active {
+            display: block;
+        }
+
+        .nav-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 12px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(30, 120, 117, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(30, 120, 117, 0.15);
+        }
+
+        .nav-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(30, 120, 117, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot:hover {
+            background: rgba(30, 120, 117, 0.4);
+            transform: scale(1.3);
+        }
+
+        .nav-dot.active {
+            background: #1E7875;
+            transform: scale(1.5);
+            box-shadow: 0 0 0 3px rgba(30, 120, 117, 0.2);
+        }
+
+        .nav-dot::after {
+            content: attr(data-title);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1E7875;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-family: 'Lato', sans-serif;
+            box-shadow: 0 4px 12px rgba(30, 120, 117, 0.2);
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+            visibility: visible;
+            right: 22px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .floating-nav {
+                right: 10px;
+            }
+            
+            .nav-dots {
+                padding: 16px 10px;
+                gap: 12px;
+            }
+            
+            .nav-dot {
+                width: 12px;
+                height: 12px;
+            }
+            
+            .nav-dot::after {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            
+            .nav-dot.active {
+                transform: scale(1.4);
+            }
+        }
+
+        /* Section IDs for navigation */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -383,6 +488,130 @@
                 // Scroll to top when changing pages
                 window.scrollTo(0, 0);
             }
+
+            // Floating Navigation Panel Logic
+            const floatingNav = document.createElement('div');
+            floatingNav.className = 'floating-nav';
+            floatingNav.innerHTML = `
+                <div class="nav-dots">
+                    <div class="nav-dot" data-section="hero" data-title="Hero"></div>
+                    <div class="nav-dot" data-section="benefits" data-title="Benefits"></div>
+                    <div class="nav-dot" data-section="vision" data-title="Vision & Impact"></div>
+                    <div class="nav-dot" data-section="features" data-title="Features"></div>
+                    <div class="nav-dot" data-section="audience" data-title="Who We Serve"></div>
+                    <div class="nav-dot" data-section="contact" data-title="Contact"></div>
+                </div>
+            `;
+            document.body.appendChild(floatingNav);
+
+            // Add IDs to sections for navigation
+            const sections = {
+                'hero': document.querySelector('section.bg-gradient-to-br'),
+                'benefits': document.querySelector('section.py-16.bg-white'),
+                'vision': document.querySelector('section.py-16.bg-gradient-to-r'),
+                'features': document.querySelector('section.py-16.bg-gray-50'),
+                'audience': document.querySelector('section.py-16.bg-ilec-secondary'),
+                'contact': document.getElementById('contact')
+            };
+
+            // Add IDs to sections
+            Object.entries(sections).forEach(([id, section]) => {
+                if (section) {
+                    section.id = id;
+                }
+            });
+
+            // Handle floating nav dot clicks
+            floatingNav.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Show/hide floating nav based on scroll and page
+            let scrollTimer;
+            let isScrolling = false;
+            
+            window.addEventListener('scroll', () => {
+                // Show nav only on home page
+                const homePage = document.getElementById('home-page');
+                if (homePage.classList.contains('active')) {
+                    floatingNav.classList.add('active');
+                    
+                    // Update active dot based on scroll position
+                    if (!isScrolling) {
+                        isScrolling = true;
+                        clearTimeout(scrollTimer);
+                        scrollTimer = setTimeout(() => {
+                            updateActiveDot();
+                            isScrolling = false;
+                        }, 50);
+                    }
+                } else {
+                    floatingNav.classList.remove('active');
+                }
+            });
+
+            function updateActiveDot() {
+                const scrollPosition = window.scrollY + 150; // Adjusted offset
+                const dots = floatingNav.querySelectorAll('.nav-dot');
+                
+                // Find which section is currently in view
+                let activeSection = '';
+                let closestDistance = Infinity;
+                
+                Object.entries(sections).forEach(([id, section]) => {
+                    if (section) {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.offsetHeight;
+                        const sectionBottom = sectionTop + sectionHeight;
+                        
+                        // Check if current scroll position is within this section
+                        const isInSection = scrollPosition >= sectionTop && scrollPosition <= sectionBottom;
+                        
+                        // Calculate distance to the top of the section
+                        const distance = Math.abs(scrollPosition - sectionTop);
+                        
+                        if (isInSection && distance < closestDistance) {
+                            closestDistance = distance;
+                            activeSection = id;
+                        }
+                        
+                        // Special case for contact section - if we're near the bottom
+                        if (id === 'contact' && 
+                            scrollPosition >= sectionTop - 200 && 
+                            scrollPosition <= document.body.scrollHeight - 100) {
+                            activeSection = 'contact';
+                        }
+                    }
+                });
+
+                // Fallback: If no section is active but we're at the top
+                if (!activeSection && scrollPosition < 300) {
+                    activeSection = 'hero';
+                }
+
+                // Update active dot
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-section') === activeSection) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+
+            // Listen for scroll events to update dots
+            window.addEventListener('scroll', updateActiveDot);
+            
+            // Initial update
+            updateActiveDot();
         });
     </script>
 </head>
@@ -404,7 +633,7 @@
     <div id="home-page" class="page active">
         <main>
             <!-- Hero Section with Problem Statement -->
-            <section class="bg-gradient-to-br from-ilec-secondary via-white to-ilec-secondary/50 py-16 sm:py-24">
+            <section id="hero" class="bg-gradient-to-br from-ilec-secondary via-white to-ilec-secondary/50 py-16 sm:py-24">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-8">
                         <span class="sdg-badge">
@@ -533,7 +762,7 @@
             </section>
 
             <!-- Benefits Section with 3x2 Grid -->
-            <section class="py-16 sm:py-24 bg-white">
+            <section id="benefits" class="py-16 sm:py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-4xl font-heading font-bold text-gray-900 mb-4 text-center">
                         Tangible Benefits You'll Experience
@@ -703,7 +932,7 @@
             </section>
 
             <!-- Vision & SDG/Wawasan Alignment -->
-            <section class="py-16 sm:py-24 bg-gradient-to-r from-gray-50 to-ilec-secondary/30">
+            <section id="vision" class="py-16 sm:py-24 bg-gradient-to-r from-gray-50 to-ilec-secondary/30">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         <div class="lg:col-span-7">
@@ -755,13 +984,13 @@
                                         </div>
                                     </div>
                                     <div class="flex items-start">
-                                        <i data-lucide="globe" class="w-5 h-5 text-ilec-primary mr-3 mt-1"></i>
+                                        <i data-lucide="globe" class="w-5 h-5 text-ilec-primary mr-3 mt=1"></i>
                                         <div>
                                             <strong>National Level:</strong> Healthier population, stronger economy, sustainable development
                                         </div>
                                     </div>
                                     <div class="flex items-start">
-                                        <i data-lucide="bar-chart" class="w-5 h-5 text-ilec-primary mr-3 mt-1"></i>
+                                        <i data-lucide="bar-chart" class="w-5 h-5 text-ilec-primary mr-3 mt=1"></i>
                                         <div>
                                             <strong>Data-Driven:</strong> Anonymous insights help shape better national health policies
                                         </div>
@@ -830,7 +1059,7 @@
             </section>
 
             <!-- Features Section -->
-            <section class="py-16 sm:py-24 bg-gray-50">
+            <section id="features" class="py-16 sm:py-24 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-center text-4xl font-heading font-bold text-gray-900 mb-4">
                         How i.lec Delivers Tangible Value
@@ -891,7 +1120,7 @@
                                 <b>Resource Library:</b> Browse a library of curated content for effective stress management and mental wellness. 
                             </p>
                             <div class="text-sm text-ilec-primary font-semibold">
-                                <i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>
+                                <i data-lucide="check-circle" class="w-4 h-4 inline mr=1"></i>
                                 Evidence-based techniques that work
                             </div>
                         </div>
@@ -900,7 +1129,7 @@
             </section>
 
             <!-- Audience & Partnerships Section -->
-            <section class="py-16 sm:py-24 bg-ilec-secondary">
+            <section id="audience" class="py-16 sm:py-24 bg-ilec-secondary">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <div class="bg-white p-8 rounded-xl shadow-xl">
@@ -1000,7 +1229,7 @@
                     
                     <p class="mb-6">At i.lec, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you interact with our platform.</p>
                     
-                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">Information We Collect</h2>
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb=4">Information We Collect</h2>
                     <p class="mb-4">We may collect the following types of information:</p>
                     <ul class="list-disc pl-6 mb-6">
                         <li><strong>Personal Information:</strong> such as your name, email address, or account details if you choose to register.</li>
@@ -1008,7 +1237,7 @@
                         <li><strong>Usage Information:</strong> technical details like browser type, device, and IP address to improve site performance.</li>
                     </ul>
                     
-                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt-8 mb-4">How We Use Your Information</h2>
+                    <h2 class="text-2xl font-heading font-bold text-ilec-primary mt=8 mb-4">How We Use Your Information</h2>
                     <p class="mb-4">Your information helps us to:</p>
                     <ul class="list-disc pl-6 mb-6">
                         <li>Provide and personalize your experience on i.lec</li>
@@ -1041,7 +1270,7 @@
         <section class="py-16 bg-white">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="legal-content">
-                    <h1 class="text-4xl font-heading font-bold text-ilec-primary mb-6">Terms of Service</h1>
+                    <h1 class="text-4xl font-heading font-bold text-ilec-primary mb=6">Terms of Service</h1>
                     <p class="text-gray-600 mb-6"><strong>Last updated: October 2025</strong></p>
                     
                     <p class="mb-6">Welcome to i.lec. By accessing or using our platform, you agree to the following Terms of Service. Please read them carefully.</p>
