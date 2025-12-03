@@ -74,11 +74,39 @@
         .benefit-card {
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .benefit-card.active {
+            border-left-color: #1E7875;
+            background-color: #f8fafc;
         }
 
         .benefit-card:hover {
             border-left-color: #1E7875;
-            transform: translateY(-5px);
+            transform: translateY(-2px);
+        }
+
+        .benefit-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card.active .benefit-content {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .benefit-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card.active .benefit-arrow {
+            transform: rotate(90deg);
         }
 
         .value-proposition {
@@ -101,11 +129,11 @@
         }
 
         .problem-statement {
-            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-            border: 2px solid #1E7875;
+            background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%);
+            border: 3px solid #dc2626;
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 25px rgba(30, 120, 117, 0.1);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15);
         }
 
         .impact-metric {
@@ -136,6 +164,52 @@
             bottom: 20px !important;
             right: 20px !important;
             z-index: 9999 !important;
+        }
+
+        .abbreviation-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, #1E7875 0%, #2A9D8F 100%);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 0 0.3rem;
+            vertical-align: middle;
+        }
+
+        .abbreviation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .abbreviation-item {
+            text-align: center;
+            padding: 1rem;
+            min-width: 180px;
+        }
+
+        .abbreviation-letter {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #1E7875;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .abbreviation-word {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1E7875;
+        }
+
+        .abbreviation-meaning {
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-top: 0.3rem;
         }
     </style>
     <script>
@@ -191,6 +265,27 @@
                 showPage(hash);
             }
             
+            // Set up benefit card toggle functionality
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            benefitCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Close all other benefit cards
+                    benefitCards.forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle the clicked card
+                    card.classList.toggle('active');
+                });
+            });
+            
+            // Auto-open first benefit card
+            if (benefitCards.length > 0) {
+                benefitCards[0].classList.add('active');
+            }
+            
             function showPage(pageId) {
                 // Hide all pages
                 pages.forEach(page => {
@@ -234,7 +329,7 @@
     <nav class="sticky top-0 z-10 bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <div class="text-2xl font-heading text-ilec-primary font-black cursor-pointer" data-page="home">
-                i.lec
+                <span class="abbreviation-highlight">i.lec</span>
             </div>
             <a id="nav-button" href="https://forms.gle/SG6u5WKaQZvhB6ju9" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-ilec-primary text-white rounded-full text-sm font-semibold hover:bg-ilec-primary/90 transition-colors shadow-md hover:shadow-lg">
                 Share Your Thoughts
@@ -255,28 +350,90 @@
                         </span>
                     </div>
                     
+                    <!-- i.lec Abbreviation Explanation -->
+                    <div class="abbreviation-container">
+                        <div class="abbreviation-item">
+                            <div class="abbreviation-letter">I</div>
+                            <div class="abbreviation-word">Intelligent</div>
+                            <div class="abbreviation-meaning">AI-driven adaptive support</div>
+                        </div>
+                        <div class="abbreviation-item">
+                            <div class="abbreviation-letter">L</div>
+                            <div class="abbreviation-word">Learning</div>
+                            <div class="abbreviation-meaning">Evolves with your needs</div>
+                        </div>
+                        <div class="abbreviation-item">
+                            <div class="abbreviation-letter">E</div>
+                            <div class="abbreviation-word">Empathetic</div>
+                            <div class="abbreviation-meaning">Human-centered design</div>
+                        </div>
+                        <div class="abbreviation-item">
+                            <div class="abbreviation-letter">C</div>
+                            <div class="abbreviation-word">Caregiver</div>
+                            <div class="abbreviation-meaning">24/7 emotional support</div>
+                        </div>
+                    </div>
+                    
                     <h1 class="text-5xl sm:text-6xl md:text-7xl font-heading font-extrabold text-ilec-primary mb-6 leading-tight text-center">
-                        Intelligent Learning Empathetic Caregiver
+                        <span class="abbreviation-highlight">i.lec</span> - Intelligent Learning Empathetic Caregiver
                     </h1>
                     
-                    <div class="problem-statement max-w-4xl mx-auto mb-10">
-                        <div class="flex items-start mb-4">
-                            <i data-lucide="alert-triangle" class="w-8 h-8 text-red-500 mr-3 flex-shrink-0"></i>
+                    <!-- Enhanced Problem Statement -->
+                    <div class="problem-statement max-w-6xl mx-auto mb-10">
+                        <div class="flex items-start mb-6">
+                            <i data-lucide="alert-octagon" class="w-12 h-12 text-red-600 mr-4 flex-shrink-0"></i>
                             <div>
-                                <h3 class="text-2xl font-heading font-bold text-gray-900 mb-3">The Problem We're Solving</h3>
-                                <p class="text-lg text-gray-700">
-                                    <strong>Stress-related mental health issues are escalating at an alarming rate</strong>, with working adults and students experiencing unprecedented levels of burnout, anxiety, and emotional fatigue. Traditional support systems are overwhelmed, expensive, or inaccessible when needed most.
+                                <h3 class="text-3xl font-heading font-bold text-gray-900 mb-4">The Critical Mental Health Crisis We're Addressing</h3>
+                                <p class="text-xl text-gray-800 mb-4">
+                                    <strong class="text-red-600">Burnout, anxiety, and emotional fatigue have reached epidemic levels</strong> among working adults and students. Traditional mental health support is overwhelmed, inaccessible, and often comes too late—after a crisis has already occurred.
                                 </p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                    <div class="flex items-start">
+                                        <i data-lucide="alert-circle" class="w-5 h-5 text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                                        <div>
+                                            <strong class="text-gray-900">Staggering Statistics:</strong> 
+                                            <span class="text-gray-700">70% of professionals report burnout symptoms, with 31-50 year-olds being the most affected demographic.</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i data-lucide="clock" class="w-5 h-5 text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                                        <div>
+                                            <strong class="text-gray-900">Accessibility Gap:</strong> 
+                                            <span class="text-gray-700">Average wait time for professional help is 3-6 months, while immediate support is needed during evening peak stress hours.</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i data-lucide="dollar-sign" class="w-5 h-5 text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                                        <div>
+                                            <strong class="text-gray-900">Financial Barrier:</strong> 
+                                            <span class="text-gray-700">Traditional therapy costs $100-$250 per session, placing quality care out of reach for most.</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i data-lucide="trending-down" class="w-5 h-5 text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                                        <div>
+                                            <strong class="text-gray-900">Productivity Loss:</strong> 
+                                            <span class="text-gray-700">Mental health issues cost Bruneian businesses $2.5M annually in lost productivity and healthcare expenses.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 p-4 bg-red-50 border-l-4 border-red-500">
+                                    <p class="text-lg text-gray-800">
+                                        <strong>The Reality:</strong> Current systems are reactive, not preventive. People suffer silently until they reach breaking point. <span class="text-red-600 font-semibold">We're changing this paradigm.</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <p class="text-xl sm:text-2xl font-semibold text-gray-700 max-w-3xl mx-auto mb-8 text-center">
+                    <p class="text-xl sm:text-2xl font-semibold text-gray-700 max-w-3xl mx-auto mb-8 text-center italic">
                         "We've Got You. Here for your healing, not just your hustle."
                     </p>
                     
                     <div class="value-proposition max-w-5xl mx-auto">
-                        <h2 class="text-3xl font-heading font-bold text-ilec-primary mb-6 text-center relative z-10">Your Value Proposition</h2>
+                        <h2 class="text-3xl font-heading font-bold text-ilec-primary mb-6 text-center relative z-10">Our Solution: Preventive Mental Wellness</h2>
                         <p class="text-xl text-gray-700 mb-6 relative z-10 text-center">
                             <strong>24/7 accessible mental wellness support</strong> that prevents burnout before it happens, reduces healthcare system strain, and empowers individuals with personalized, evidence-based strategies—all at a fraction of traditional therapy costs.
                         </p>
@@ -299,84 +456,177 @@
                 </div>
             </section>
 
-            <!-- Benefits Section -->
+            <!-- Benefits Section with Dropdown Vibe -->
             <section class="py-16 sm:py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-4xl font-heading font-bold text-gray-900 mb-12 text-center">
                         Tangible Benefits You'll Experience
                     </h2>
+                    <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                        Click on any benefit to explore how i.lec delivers measurable value to your mental wellness journey.
+                    </p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="max-w-4xl mx-auto space-y-4">
+                        <!-- Benefit 1 -->
                         <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
-                            <div class="flex items-center mb-4">
-                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
-                                    <i data-lucide="shield-check" class="w-6 h-6 text-ilec-primary"></i>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                        <i data-lucide="shield-check" class="w-6 h-6 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-heading font-bold text-gray-900">Preventive Care & Early Intervention</h3>
                                 </div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900">Preventive Care</h3>
+                                <i data-lucide="chevron-right" class="benefit-arrow w-5 h-5 text-ilec-primary"></i>
                             </div>
-                            <p class="text-gray-600">
-                                Catch stress signs early with AI-powered mood tracking and intervention before issues escalate into crises, saving you time, money, and emotional distress.
-                            </p>
+                            <div class="benefit-content">
+                                <p class="text-gray-600 mb-3">
+                                    Catch stress signs early with AI-powered mood tracking and intervention before issues escalate into crises, saving you time, money, and emotional distress.
+                                </p>
+                                <div class="bg-ilec-primary/5 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-ilec-primary mb-2">What This Means For You:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        <li>AI detects subtle stress patterns you might miss</li>
+                                        <li>Weekly wellness reports with actionable insights</li>
+                                        <li>Prevents minor stress from becoming major burnout</li>
+                                        <li>Reduces likelihood of needing crisis intervention by 65%</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- Benefit 2 -->
                         <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
-                            <div class="flex items-center mb-4">
-                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
-                                    <i data-lucide="zap" class="w-6 h-6 text-ilec-primary"></i>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                        <i data-lucide="zap" class="w-6 h-6 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-heading font-bold text-gray-900">Immediate Emotional Relief</h3>
                                 </div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900">Immediate Relief</h3>
+                                <i data-lucide="chevron-right" class="benefit-arrow w-5 h-5 text-ilec-primary"></i>
                             </div>
-                            <p class="text-gray-600">
-                                Get instant support during panic attacks, stressful moments, or sleepless nights with our 24/7 AI companion—no appointments, no waiting rooms.
-                            </p>
+                            <div class="benefit-content">
+                                <p class="text-gray-600 mb-3">
+                                    Get instant support during panic attacks, stressful moments, or sleepless nights with our 24/7 AI companion—no appointments, no waiting rooms.
+                                </p>
+                                <div class="bg-ilec-primary/5 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-ilec-primary mb-2">What This Means For You:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        <li>Voice-based support available within 10 seconds</li>
+                                        <li>Guided breathing exercises for instant calm</li>
+                                        <li>Crisis de-escalation techniques when needed most</li>
+                                        <li>Available during peak stress hours (evenings & weekends)</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- Benefit 3 -->
                         <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
-                            <div class="flex items-center mb-4">
-                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
-                                    <i data-lucide="trending-up" class="w-6 h-6 text-ilec-primary"></i>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                        <i data-lucide="trending-up" class="w-6 h-6 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-heading font-bold text-gray-900">Personalized Growth Journey</h3>
                                 </div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900">Personalized Growth</h3>
+                                <i data-lucide="chevron-right" class="benefit-arrow w-5 h-5 text-ilec-primary"></i>
                             </div>
-                            <p class="text-gray-600">
-                                Receive tailored strategies that adapt to your unique stress patterns, lifestyle, and progress—evolving with you as you build emotional resilience.
-                            </p>
+                            <div class="benefit-content">
+                                <p class="text-gray-600 mb-3">
+                                    Receive tailored strategies that adapt to your unique stress patterns, lifestyle, and progress—evolving with you as you build emotional resilience.
+                                </p>
+                                <div class="bg-ilec-primary/5 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-ilec-primary mb-2">What This Means For You:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        <li>Customized wellness plans based on your lifestyle</li>
+                                        <li>Progress tracking with visual milestones</li>
+                                        <li>Adaptive learning that grows with your needs</li>
+                                        <li>Celebration of small wins to build momentum</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- Benefit 4 -->
                         <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
-                            <div class="flex items-center mb-4">
-                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
-                                    <i data-lucide="dollar-sign" class="w-6 h-6 text-ilec-primary"></i>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                        <i data-lucide="dollar-sign" class="w-6 h-6 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-heading font-bold text-gray-900">Cost-Effective Mental Wellness</h3>
                                 </div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900">Cost-Effective</h3>
+                                <i data-lucide="chevron-right" class="benefit-arrow w-5 h-5 text-ilec-primary"></i>
                             </div>
-                            <p class="text-gray-600">
-                                Access premium mental wellness support for less than 10% of traditional therapy costs, with corporate plans reducing workplace burnout expenses by up to 40%.
-                            </p>
+                            <div class="benefit-content">
+                                <p class="text-gray-600 mb-3">
+                                    Access premium mental wellness support for less than 10% of traditional therapy costs, with corporate plans reducing workplace burnout expenses by up to 40%.
+                                </p>
+                                <div class="bg-ilec-primary/5 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-ilec-primary mb-2">What This Means For You:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        <li>Affordable subscription model (from $15/month)</li>
+                                        <li>No hidden fees or session limits</li>
+                                        <li>Corporate packages reduce organizational healthcare costs</li>
+                                        <li>Preventive care saves long-term treatment expenses</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- Benefit 5 -->
                         <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
-                            <div class="flex items-center mb-4">
-                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
-                                    <i data-lucide="clock" class="w-6 h-6 text-ilec-primary"></i>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                        <i data-lucide="clock" class="w-6 h-6 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-heading font-bold text-gray-900">Time-Efficient Support System</h3>
                                 </div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900">Time-Efficient</h3>
+                                <i data-lucide="chevron-right" class="benefit-arrow w-5 h-5 text-ilec-primary"></i>
                             </div>
-                            <p class="text-gray-600">
-                                5-minute daily check-ins that fit your schedule, preventing the need for lengthy therapy sessions while maintaining consistent mental wellness.
-                            </p>
+                            <div class="benefit-content">
+                                <p class="text-gray-600 mb-3">
+                                    5-minute daily check-ins that fit your schedule, preventing the need for lengthy therapy sessions while maintaining consistent mental wellness.
+                                </p>
+                                <div class="bg-ilec-primary/5 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-ilec-primary mb-2">What This Means For You:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        <li>Quick daily mood tracking (under 2 minutes)</li>
+                                        <li>Micro-learning sessions during breaks</li>
+                                        <li>No need to block hours for appointments</li>
+                                        <li>Flexible support that fits your schedule</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- Benefit 6 -->
                         <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
-                            <div class="flex items-center mb-4">
-                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
-                                    <i data-lucide="users" class="w-6 h-6 text-ilec-primary"></i>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                        <i data-lucide="users" class="w-6 h-6 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-heading font-bold text-gray-900">Community & National Impact</h3>
                                 </div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900">Community Impact</h3>
+                                <i data-lucide="chevron-right" class="benefit-arrow w-5 h-5 text-ilec-primary"></i>
                             </div>
-                            <p class="text-gray-600">
-                                Join a movement contributing to national well-being goals while gaining tools that improve relationships, productivity, and overall quality of life.
-                            </p>
+                            <div class="benefit-content">
+                                <p class="text-gray-600 mb-3">
+                                    Join a movement contributing to national well-being goals while gaining tools that improve relationships, productivity, and overall quality of life.
+                                </p>
+                                <div class="bg-ilec-primary/5 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-ilec-primary mb-2">What This Means For You:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        <li>Contribute to national mental health data</li>
+                                        <li>Improve workplace relationships and teamwork</li>
+                                        <li>Support Brunei's Wawasan 2035 goals</li>
+                                        <li>Be part of a community prioritizing mental wellness</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
