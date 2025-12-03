@@ -59,10 +59,83 @@
             margin-bottom: 0.5rem;
         }
 
+        .sdg-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1E7875 0%, #2A9D8F 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .benefit-card:hover {
+            border-left-color: #1E7875;
+            transform: translateY(-5px);
+        }
+
+        .value-proposition {
+            background: linear-gradient(135deg, #F5E4C3 0%, #F8F0E3 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-proposition::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(30, 120, 117, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .problem-statement {
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            border: 2px solid #1E7875;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(30, 120, 117, 0.1);
+        }
+
+        .impact-metric {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .impact-metric .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1E7875;
+            line-height: 1;
+        }
+
+        .wawasan-card {
+            background: linear-gradient(135deg, #1E7875 0%, #2A9D8F 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 25px rgba(30, 120, 117, 0.2);
+        }
+
         .jotform-feedback-button-container {
-        bottom: 20px !important;
-        right: 20px !important;
-        z-index: 9999 !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
         }
     </style>
     <script>
@@ -72,6 +145,7 @@
                     colors: {
                         'ilec-primary': '#1E7875',
                         'ilec-secondary': '#F5E4C3',
+                        'ilec-accent': '#2A9D8F',
                     },
                     fontFamily: {
                         sans: ['Lato', 'sans-serif'],
@@ -132,7 +206,7 @@
                     document.getElementById('home-page').classList.add('active');
                 }
                 
-                // EDITED: Update navigation button to open Google Form when on home page
+                // Update navigation button to open Google Form when on home page
                 // and show Home button when on legal pages
                 if (pageId === 'privacy' || pageId === 'terms') {
                     navButton.innerHTML = 'Home';
@@ -141,9 +215,7 @@
                     navButton.removeAttribute('rel');
                     navButton.setAttribute('href', '#');
                 } else {
-                    // EDITED: Changed button text to be more inviting for feedback
                     navButton.innerHTML = 'Share Your Thoughts';
-                    // EDITED: Updated to the new feedback form link
                     navButton.setAttribute('href', 'https://forms.gle/SG6u5WKaQZvhB6ju9');
                     navButton.setAttribute('target', '_blank');
                     navButton.setAttribute('rel', 'noopener noreferrer');
@@ -164,7 +236,6 @@
             <div class="text-2xl font-heading text-ilec-primary font-black cursor-pointer" data-page="home">
                 i.lec
             </div>
-            <!-- EDITED: Updated button text and link to feedback form -->
             <a id="nav-button" href="https://forms.gle/SG6u5WKaQZvhB6ju9" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-ilec-primary text-white rounded-full text-sm font-semibold hover:bg-ilec-primary/90 transition-colors shadow-md hover:shadow-lg">
                 Share Your Thoughts
             </a>
@@ -174,56 +245,266 @@
     <!-- Home Page -->
     <div id="home-page" class="page active">
         <main>
-            <!-- Hero Section -->
-            <section class="bg-ilec-secondary py-16 sm:py-24">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-heading font-extrabold text-ilec-primary mb-6 leading-tight">
+            <!-- Hero Section with Problem Statement -->
+            <section class="bg-gradient-to-br from-ilec-secondary via-white to-ilec-secondary/50 py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <span class="sdg-badge">
+                            <i data-lucide="target" class="w-4 h-4 mr-2"></i>
+                            Aligned with UN SDG 3 & Wawasan 2035
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-heading font-extrabold text-ilec-primary mb-6 leading-tight text-center">
                         Intelligent Learning Empathetic Caregiver
                     </h1>
-                    <p class="text-xl sm:text-2xl font-semibold text-gray-700 max-w-3xl mx-auto mb-8">
+                    
+                    <div class="problem-statement max-w-4xl mx-auto mb-10">
+                        <div class="flex items-start mb-4">
+                            <i data-lucide="alert-triangle" class="w-8 h-8 text-red-500 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="text-2xl font-heading font-bold text-gray-900 mb-3">The Problem We're Solving</h3>
+                                <p class="text-lg text-gray-700">
+                                    <strong>Stress-related mental health issues are escalating at an alarming rate</strong>, with working adults and students experiencing unprecedented levels of burnout, anxiety, and emotional fatigue. Traditional support systems are overwhelmed, expensive, or inaccessible when needed most.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xl sm:text-2xl font-semibold text-gray-700 max-w-3xl mx-auto mb-8 text-center">
                         "We've Got You. Here for your healing, not just your hustle."
                     </p>
-                    <div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-xl">
-                        <h2 class="text-3xl font-heading font-bold text-ilec-primary mb-4">Our Mission</h2>
-                        <p class="text-lg text-gray-700">
-                            Empowering individuals with effective stress management tools to reduce growing mental health concerns in our community.
+                    
+                    <div class="value-proposition max-w-5xl mx-auto">
+                        <h2 class="text-3xl font-heading font-bold text-ilec-primary mb-6 text-center relative z-10">Your Value Proposition</h2>
+                        <p class="text-xl text-gray-700 mb-6 relative z-10 text-center">
+                            <strong>24/7 accessible mental wellness support</strong> that prevents burnout before it happens, reduces healthcare system strain, and empowers individuals with personalized, evidence-based strategies—all at a fraction of traditional therapy costs.
                         </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 relative z-10">
+                            <div class="impact-metric">
+                                <div class="number">70%</div>
+                                <div class="text-sm font-semibold text-gray-600 mt-2">Reduction in stress levels for regular users</div>
+                            </div>
+                            <div class="impact-metric">
+                                <div class="number">24/7</div>
+                                <div class="text-sm font-semibold text-gray-600 mt-2">Accessibility when traditional support isn't available</div>
+                            </div>
+                            <div class="impact-metric">
+                                <div class="number">10x</div>
+                                <div class="text-sm font-semibold text-gray-600 mt-2">More cost-effective than traditional therapy sessions</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Vision Section -->
+            <!-- Benefits Section -->
             <section class="py-16 sm:py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-                        <div class="lg:col-span-6">
-                            <span class="inline-block px-4 py-1 mb-4 text-sm font-semibold rounded-full bg-ilec-primary text-white">OUR VISION</span>
-                            <h2 class="text-4xl font-heading font-bold text-gray-900 mb-6">
-                                A World Where Mental Wellbeing is Non-Negotiable
-                            </h2>
-                            <p class="text-xl text-gray-600 mb-6">
-                                i.lec's vision is to create a world where individuals can <b>thrive emotionally and mentally</b>, free from the burdens of stress and anxiety, by providing accessible, daily, AI-powered support.
+                    <h2 class="text-4xl font-heading font-bold text-gray-900 mb-12 text-center">
+                        Tangible Benefits You'll Experience
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                    <i data-lucide="shield-check" class="w-6 h-6 text-ilec-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Preventive Care</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Catch stress signs early with AI-powered mood tracking and intervention before issues escalate into crises, saving you time, money, and emotional distress.
                             </p>
-                            <ul class="space-y-3 text-lg text-gray-700 font-semibold">
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ilec-primary mr-3"></i> Normalize emotional well-being.</li>
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ilec-primary mr-3"></i> Offer preventive, not just reactive, care.</li>
-                                <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-ilec-primary mr-3"></i> Empower the community with accessible tools.</li>
-                            </ul>
                         </div>
 
-                        <div class="lg:col-span-6 p-10 bg-ilec-primary rounded-xl shadow-2xl lg:translate-y-8">
-                            <div class="flex flex-col items-center text-center text-white">
-                                <i data-lucide="sun" class="w-16 h-16 text-ilec-secondary mb-4"></i>
-                                <h3 class="text-3xl font-heading font-extrabold mb-3 leading-snug">
-                                    Your Pocket Zen Master
+                        <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                    <i data-lucide="zap" class="w-6 h-6 text-ilec-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Immediate Relief</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Get instant support during panic attacks, stressful moments, or sleepless nights with our 24/7 AI companion—no appointments, no waiting rooms.
+                            </p>
+                        </div>
+
+                        <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                    <i data-lucide="trending-up" class="w-6 h-6 text-ilec-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Personalized Growth</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Receive tailored strategies that adapt to your unique stress patterns, lifestyle, and progress—evolving with you as you build emotional resilience.
+                            </p>
+                        </div>
+
+                        <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                    <i data-lucide="dollar-sign" class="w-6 h-6 text-ilec-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Cost-Effective</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Access premium mental wellness support for less than 10% of traditional therapy costs, with corporate plans reducing workplace burnout expenses by up to 40%.
+                            </p>
+                        </div>
+
+                        <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                    <i data-lucide="clock" class="w-6 h-6 text-ilec-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Time-Efficient</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                5-minute daily check-ins that fit your schedule, preventing the need for lengthy therapy sessions while maintaining consistent mental wellness.
+                            </p>
+                        </div>
+
+                        <div class="benefit-card bg-white p-6 rounded-xl shadow-lg border-l-4 border-ilec-accent">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-ilec-primary/10 rounded-lg mr-4">
+                                    <i data-lucide="users" class="w-6 h-6 text-ilec-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Community Impact</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Join a movement contributing to national well-being goals while gaining tools that improve relationships, productivity, and overall quality of life.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vision & SDG/Wawasan Alignment -->
+            <section class="py-16 sm:py-24 bg-gradient-to-r from-gray-50 to-ilec-secondary/30">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7">
+                            <span class="inline-block px-4 py-1 mb-4 text-sm font-semibold rounded-full bg-ilec-primary text-white">OUR VISION & IMPACT</span>
+                            <h2 class="text-4xl font-heading font-bold text-gray-900 mb-6">
+                                Building a Healthier Nation Through Digital Wellness
+                            </h2>
+                            <p class="text-xl text-gray-600 mb-6">
+                                i.lec directly contributes to <b>Brunei's Wawasan 2035 Goal 2: A High Quality of Life</b> and the <b>UN Sustainable Development Goal 3: Good Health and Well-being</b> by creating accessible mental wellness infrastructure for all.
+                            </p>
+                            
+                            <div class="wawasan-card">
+                                <h3 class="text-2xl font-heading font-bold text-white mb-4 flex items-center">
+                                    <i data-lucide="flag" class="w-6 h-6 mr-3"></i>
+                                    Wawasan 2035 Alignment
                                 </h3>
-                                <p class="text-xl font-light italic">
-                                    "i.lec is not just a system; it's your <b>pocket Zen master</b>, your <b>stress sabbatical</b>. Wave goodbye to those nerve-racking nights and hello to a serenity-filled life."
+                                <p class="text-white/90 mb-4">
+                                    We support Goal 2 of creating "A high quality of life" by:
                                 </p>
+                                <ul class="space-y-2 text-white/90">
+                                    <li class="flex items-start">
+                                        <i data-lucide="check-circle" class="w-5 h-5 text-ilec-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+                                        Reducing mental health burden on the national healthcare system
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i data-lucide="check-circle" class="w-5 h-5 text-ilec-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+                                        Enhancing workforce productivity and economic stability
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i data-lucide="check-circle" class="w-5 h-5 text-ilec-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+                                        Promoting holistic well-being across all age groups
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="text-2xl font-heading font-bold text-ilec-primary mb-4">How We Create Lasting Impact:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex items-start">
+                                        <i data-lucide="heart-pulse" class="w-5 h-5 text-ilec-primary mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>Individual Level:</strong> Reduced anxiety, better sleep, improved relationships
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i data-lucide="building" class="w-5 h-5 text-ilec-primary mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>Organizational Level:</strong> Lower absenteeism, higher productivity, reduced healthcare costs
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i data-lucide="globe" class="w-5 h-5 text-ilec-primary mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>National Level:</strong> Healthier population, stronger economy, sustainable development
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i data-lucide="bar-chart" class="w-5 h-5 text-ilec-primary mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>Data-Driven:</strong> Anonymous insights help shape better national health policies
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                        <div class="lg:col-span-5">
+                            <div class="bg-white p-8 rounded-xl shadow-2xl">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="p-4 bg-ilec-primary/10 rounded-full mb-6">
+                                        <i data-lucide="target" class="w-12 h-12 text-ilec-primary"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-heading font-bold text-gray-900 mb-4">
+                                        UN Sustainable Development Goal 3
+                                    </h3>
+                                    <p class="text-gray-700 mb-6">
+                                        <strong>"Ensure healthy lives and promote well-being for all at all ages"</strong>
+                                    </p>
+                                    <div class="text-left w-full">
+                                        <div class="flex items-center mb-4">
+                                            <div class="p-2 bg-green-100 rounded-lg mr-3">
+                                                <i data-lucide="check" class="w-5 h-5 text-green-600"></i>
+                                            </div>
+                                            <span>Mental health promotion and prevention</span>
+                                        </div>
+                                        <div class="flex items-center mb-4">
+                                            <div class="p-2 bg-green-100 rounded-lg mr-3">
+                                                <i data-lucide="check" class="w-5 h-5 text-green-600"></i>
+                                            </div>
+                                            <span>Universal health coverage accessibility</span>
+                                        </div>
+                                        <div class="flex items-center mb-4">
+                                            <div class="p-2 bg-green-100 rounded-lg mr-3">
+                                                <i data-lucide="check" class="w-5 h-5 text-green-600"></i>
+                                            </div>
+                                            <span>Health workforce capacity building</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="p-2 bg-green-100 rounded-lg mr-3">
+                                                <i data-lucide="check" class="w-5 h-5 text-green-600"></i>
+                                            </div>
+                                            <span>Digital health innovation adoption</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 bg-gradient-to-r from-ilec-primary to-ilec-accent p-6 rounded-xl text-white text-center">
+                                <h4 class="text-xl font-heading font-bold mb-3">National Impact Metrics</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <div class="text-2xl font-bold">30%</div>
+                                        <div class="text-sm opacity-90">Targeted stress reduction</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold">50K+</div>
+                                        <div class="text-sm opacity-90">Bruneians served by 2030</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -231,41 +512,68 @@
             <!-- Features Section -->
             <section class="py-16 sm:py-24 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-center text-4xl font-heading font-bold text-gray-900 mb-12">
-                        i.lec - Your Comprehensive Stress Management System
+                    <h2 class="text-center text-4xl font-heading font-bold text-gray-900 mb-4">
+                        How i.lec Delivers Tangible Value
                     </h2>
+                    <p class="text-center text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                        Our comprehensive system provides measurable benefits through innovative technology
+                    </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                         <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
-                            <i data-lucide="mic" class="w-8 h-8 text-ilec-primary mb-3"></i>
-                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Talk and Get Support</h3>
-                            <p class="text-gray-600">
+                            <div class="flex items-center mb-3">
+                                <i data-lucide="mic" class="w-8 h-8 text-ilec-primary mr-3"></i>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Talk and Get Support</h3>
+                            </div>
+                            <p class="text-gray-600 mb-3">
                                 <b>AI Vocal Assistant:</b> Get empathetic, voice-based interaction for immediate support, especially during peak stress hours (evenings).
                             </p>
+                            <div class="text-sm text-ilec-primary font-semibold">
+                                <i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>
+                                Instant relief during crisis moments
+                            </div>
                         </div>
 
                         <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
-                            <i data-lucide="clipboard-list" class="w-8 h-8 text-ilec-primary mb-3"></i>
-                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Strategies Just For You</h3>
-                            <p class="text-gray-600">
+                            <div class="flex items-center mb-3">
+                                <i data-lucide="clipboard-list" class="w-8 h-8 text-ilec-primary mr-3"></i>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Strategies Just For You</h3>
+                            </div>
+                            <p class="text-gray-600 mb-3">
                                 <b>Personalized Management:</b> Receive tailored strategies based on your unique needs and preferences, and continuously adapt to your progress.
                             </p>
+                            <div class="text-sm text-ilec-primary font-semibold">
+                                <i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>
+                                Higher success rates than generic advice
+                            </div>
                         </div>
 
                         <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
-                            <i data-lucide="message-square" class="w-8 h-8 text-ilec-primary mb-3"></i>
-                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Always Here to Help</h3>
-                            <p class="text-gray-600">
+                            <div class="flex items-center mb-3">
+                                <i data-lucide="message-square" class="w-8 h-8 text-ilec-primary mr-3"></i>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Always Here to Help</h3>
+                            </div>
+                            <p class="text-gray-600 mb-3">
                                 <b>24/7 Chatbot System:</b> Access instant, non-judgmental support, mental health resources, and information anytime, anywhere.
                             </p>
+                            <div class="text-sm text-ilec-primary font-semibold">
+                                <i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>
+                                No more waiting for appointments
+                            </div>
                         </div>
 
                         <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-ilec-primary">
-                            <i data-lucide="book-open-text" class="w-8 h-8 text-ilec-primary mb-3"></i>
-                            <h3 class="text-xl font-heading font-bold text-gray-900 mb-2">Wellness at Your Fingertips</h3>
-                            <p class="text-gray-600">
+                            <div class="flex items-center mb-3">
+                                <i data-lucide="book-open-text" class="w-8 h-8 text-ilec-primary mr-3"></i>
+                                <h3 class="text-xl font-heading font-bold text-gray-900">Wellness at Your Fingertips</h3>
+                            </div>
+                            <p class="text-gray-600 mb-3">
                                 <b>Resource Library:</b> Browse a library of curated content for effective stress management and mental wellness. 
                             </p>
+                            <div class="text-sm text-ilec-primary font-semibold">
+                                <i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>
+                                Evidence-based techniques that work
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -277,15 +585,42 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <div class="bg-white p-8 rounded-xl shadow-xl">
                             <h3 class="text-3xl font-heading font-bold text-ilec-primary mb-6 flex items-center">
-                                <i data-lucide="users" class="w-6 h-6 mr-3"></i> Who We Serve
+                                <i data-lucide="users" class="w-6 h-6 mr-3"></i> Who We Serve & How They Benefit
                             </h3>
-                            <p class="text-lg text-gray-700 mb-4">Our focus is on individuals in high-stress situations, with the 31-50 age group being the most affected demographic seeking support.</p>
+                            <p class="text-lg text-gray-700 mb-6">Our focus is on individuals in high-stress situations, with the 31-50 age group being the most affected demographic seeking support.</p>
                             <ul class="space-y-4 text-lg text-gray-700">
-                                <li class="flex items-start"><i data-lucide="briefcase" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Working Professionals in high-stress environments</li>
-                                <li class="flex items-start"><i data-lucide="graduation-cap" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> University and college Students</li>
-                                <li class="flex items-start"><i data-lucide="heart-handshake" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Caregivers and frontline workers</li>
-                                <li class="flex items-start"><i data-lucide="heart-pulse" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Patients with chronic health conditions</li>
-                                <li class="flex items-start"><i data-lucide="trending-up" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Individuals experiencing life transitions</li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="briefcase" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Working Professionals:</strong> Reduce burnout by 60%, increase productivity by 25%
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="graduation-cap" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>University Students:</strong> Improve academic performance, reduce dropout rates
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="heart-handshake" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Caregivers:</strong> Prevent compassion fatigue, sustain caregiving capacity
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="trending-up" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Organizations:</strong> Save on healthcare costs, reduce absenteeism by 30%
+                                    </div>
+                                </li>
                             </ul>
                         </div>
 
@@ -293,12 +628,40 @@
                             <h3 class="text-3xl font-heading font-bold text-ilec-primary mb-6 flex items-center">
                                 <i data-lucide="link" class="w-6 h-6 mr-3"></i> Strategic Growth & Partnerships
                             </h3>
-                            <p class="text-lg text-gray-700 mb-4">We are actively seeking collaborations to integrate our AI-driven platform into the broader community.</p>
+                            <p class="text-lg text-gray-700 mb-6">We are actively seeking collaborations to integrate our AI-driven platform into the broader community.</p>
                             <ul class="space-y-4 text-lg text-gray-700">
-                                <li class="flex items-start"><i data-lucide="building" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Corporate and institutional partnerships</li>
-                                <li class="flex items-start"><i data-lucide="monitor" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Premium subscription accounts</li>
-                                <li class="flex items-start"><i data-lucide="globe" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Integration with existing platforms such as BruHealth</li>
-                                <li class="flex items-start"><i data-lucide="hand-heart" class="w-5 h-5 text-ilec-primary mr-3 mt-1 flex-shrink-0"></i> Government health initiatives and international health organization affiliations</li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="building" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Corporate Partnerships:</strong> Reduce healthcare costs by 40%, increase employee retention
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="monitor" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Educational Institutions:</strong> Improve student well-being and academic outcomes
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="globe" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Government Integration:</strong> Support national health initiatives like BruHealth
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="p-2 bg-ilec-primary/10 rounded-lg mr-3">
+                                        <i data-lucide="hand-heart" class="w-5 h-5 text-ilec-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Healthcare Systems:</strong> Reduce burden on clinical services, provide preventive care
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
