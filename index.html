@@ -1,40 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>i.lec — Preventive Mental Wellness Companion</title>
-  
-  <!-- Plus Jakarta Sans Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              DEFAULT: '#1e7875',
-              hover: '#175d5b',
-              light: '#f2f8f7',
-              cream: '#f5e4c3',
-              creamLight: '#fbf7ed'
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i.lec Enterprise - Preventive Mental Wellness Ecosystem</title>
+    <style>
+        :root {
+            --primary: #2C5E3B;
+            --primary-light: #EBF4EC;
+            --secondary: #8E3A59;
+            --secondary-light: #FBF0F4;
+            --accent: #E07A5F;
+            --dark: #1F2421;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+            --border: #E2E8F0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
-      }
-    }
-  </script>
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 2rem 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tagline {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #234B2F;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .hero-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .hero-card-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* General Section Layout */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        /* Impact Section */
+        .impact-container {
+            background: white;
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .impact-item {
+            padding: 1.8rem;
+            border-radius: 16px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .impact-item:hover {
+            border-color: var(--secondary);
+            background: var(--secondary-light);
+        }
+
+        .impact-item h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .impact-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .impact-banner {
+            background: linear-gradient(135deg, var(--primary), #1B3B25);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .impact-banner h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .impact-banner p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .value-card h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .contact-info strong {
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 120px;
+            }
+            .impact-banner {
+                grid-template-columns: 1fr;
+            }
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">i.lec <span>Enterprise</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Platform Features</a></li>
+                <li><a href="#impact">Social Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <span class="tagline">Here for your healing, not just your hustle.</span>
+            <h1>AI-Powered Preventive Mental Wellness</h1>
+            <p>i.lec Enterprise combines artificial intelligence, behavioral insights, and human-centered design to help individuals recognize emotional stress early and build lasting resilience before challenges progress.</p>
+            <div class="btn-group">
+                <a href="#features" class="btn btn-primary">Explore Platform</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="hero-card">
+            <span class="hero-card-badge">Digital Health Tech</span>
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Intelligent Learning Empathetic & Caregiver</h3>
+            <p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem;">Serving as an accessible first line of support, i.lec bridges the gap between daily stress awareness and professional healthcare without replacing clinical expertise.</p>
+            <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 1rem;">
+            <p style="font-size: 0.85rem; color: var(--gray);"><strong>Founded:</strong> 2025 | <strong>Headquarters:</strong> Brunei Darussalam</p>
+        </div>
+    </section>
+
+    <!-- Platform Features Section -->
+    <section id="features">
+        <div class="section-header">
+            <h2>Comprehensive Platform Features</h2>
+            <p>Moving beyond isolated self-care, i.lec provides an integrated preventive ecosystem designed to foster long-term behavioral change and proactive wellbeing management.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>AI-Powered Supportive Conversations</h3>
+                <p>Engage in safe, reflective conversations with an empathetic conversational AI within a non-judgmental environment. Designed strictly to promote emotional self-reflection and healthy coping strategies without simulating therapy or clinical diagnosis.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Intelligent Stress & Burnout Monitoring</h3>
+                <p>Functions as an intelligent early warning mechanism by detecting underlying behavioral patterns that signal mounting emotional strain or exhaustion, prompting timely preventive action before reaching critical levels.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>Adaptive Wellness Recommendations</h3>
+                <p>Receive personalized self-care interventions based on your unique emotional journey. Includes adaptive stress management techniques, guided breathing exercises, journaling prompts, and personalized productivity strategies.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Longitudinal Emotional Analytics</h3>
+                <p>Track your long-term emotional progress through intuitive dashboards. Visualizes mood patterns, stress fluctuation, wellness activity history, and reflective logs over time to build self-awareness.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗓️</div>
+                <h3>Guided Daily Emotional Check-ins</h3>
+                <p>Structured daily reflection tools encouraging users to log mood states, identify daily stressors, and build consistent habits of self-awareness and proactive mental wellbeing care.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Responsible Referral Pathways</h3>
+                <p>Seamlessly complements traditional mental healthcare systems by actively guiding users toward qualified counsellors, psychologists, and professional support services whenever deeper intervention is needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact">
+        <div class="section-header">
+            <h2>Transformative Social Impact</h2>
+            <p>By prioritizing early detection over crisis management, i.lec creates multi-layered value across individuals, academic institutions, workplaces, and public healthcare systems.</p>
+        </div>
+        <div class="impact-container">
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <h3>For Individuals & Youth</h3>
+                    <p>Promotes early recognition of stress, reduces psychological burnout, lowers help-seeking stigma, and builds continuous, self-directed emotional resilience in everyday life.</p>
+                </div>
+                <div class="impact-item">
+                    <h3>For Educational Institutions</h3>
+                    <p>Strengthens campus wellbeing initiatives, enhances student engagement and academic retention, and provides early visibility into rising stress trends among student bodies.</p>
+                </div>
+                <div class="impact-item">
+                    <h3>For Corporate Organizations</h3>
+                    <p>Fosters healthier workplace cultures, reduces absenteeism and employee burnout, boosts workforce productivity, and delivers proactive employee care programs.</p>
+                </div>
+                <div class="impact-item">
+                    <h3>For Public Health & Society</h3>
+                    <p>Relieves systemic pressure on traditional mental healthcare infrastructures, bridges geographic and economic access gaps, and supports preventive digital public health strategies.</p>
+                </div>
+            </div>
+            <div class="impact-banner">
+                <div>
+                    <h3>Ethical AI & Data Privacy First</h3>
+                    <p>Built with non-clinical, privacy-by-design standards. i.lec respects clinical boundaries, ensuring full transparency, secure data governance, and responsible usage across all ecosystem levels.</p>
+                </div>
+                <div style="text-align: right;">
+                    <a href="#contact" class="btn" style="background: white; color: var(--primary);">Learn About Governance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section>
+        <div class="section-header">
+            <h2>Our Guided Values</h2>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <h4>Empathy</h4>
+                <p style="font-size: 0.85rem; color: var(--gray);">Human needs stay at the core of all technology.</p>
+            </div>
+            <div class="value-card">
+                <h4>Accessibility</h4>
+                <p style="font-size: 0.85rem; color: var(--gray);">Mental wellness tools open and affordable to all.</p>
+            </div>
+            <div class="value-card">
+                <h4>Innovation</h4>
+                <p style="font-size: 0.85rem; color: var(--gray);">Ethical, responsible AI application for human good.</p>
+            </div>
+            <div class="value-card">
+                <h4>Privacy</h4>
+                <p style="font-size: 0.85rem; color: var(--gray);">Uncompromising standards in ethical data protection.</p>
+            </div>
+            <div class="value-card">
+                <h4>Integrity</h4>
+                <p style="font-size: 0.85rem; color: var(--gray);">Complements clinical care without overstepping.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-card">
+            <div>
+                <h2 style="margin-bottom: 1rem; color: var(--dark);">Connect with i.lec</h2>
+                <p style="color: var(--gray); margin-bottom: 2rem;">Interested in institutional partnerships, pilots, or learning more about our preventive digital wellness solutions?</p>
+                <div class="contact-info">
+                    <p><strong>Email:</strong> talktoilec@gmail.com</p>
+                    <p><strong>Instagram:</strong> @ilec.bn</p>
+                    <p><strong>Location:</strong> Brunei Darussalam</p>
+                </div>
+            </div>
+            <div>
+                <form style="display: flex; flex-direction: column; gap: 1rem;" onsubmit="event.preventDefault(); alert('Thank you for reaching out!');">
+                    <input type="text" placeholder="Your Name" style="padding: 0.8rem; border: 1px solid var(--border); border-radius: 8px;" required>
+                    <input type="email" placeholder="Your Email" style="padding: 0.8rem; border: 1px solid var(--border); border-radius: 8px;" required>
+                    <textarea rows="4" placeholder="Your Message" style="padding: 0.8rem; border: 1px solid var(--border); border-radius: 8px;" required></te  <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
     body {
