@@ -6,7 +6,7 @@
   <title>i.lec · Preventive Mental Wellness</title>
   <!-- Font & base style -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-  <!-- Lucide & Iconoir (lightweight) -->
+  <!-- Lucide & Iconoir -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/iconoir@6.9.0/css/iconoir.min.css" />
   <style>
@@ -38,7 +38,6 @@
       --space: 1.5rem;
     }
 
-    /* ----- minimal utility ----- */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -49,22 +48,18 @@
     .bg-brand { background: var(--brand); }
     .bg-brand-subtle { background: var(--brand-subtle); }
 
-    /* ----- typography (quiet, functional) ----- */
     h1, h2, h3, h4 {
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1.2;
     }
-
     h1 { font-size: 2.8rem; }
     h2 { font-size: 2rem; }
     h3 { font-size: 1.25rem; }
-    .text-sm { font-size: 0.9rem; }
-    .text-xs { font-size: 0.75rem; }
 
     a { text-decoration: none; color: inherit; }
 
-    /* ----- header (minimal, no shadows, just border) ----- */
+    /* header */
     header {
       position: sticky;
       top: 0;
@@ -73,14 +68,12 @@
       backdrop-filter: blur(4px);
       border-bottom: 1px solid var(--gray-300);
     }
-
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 64px;
     }
-
     .logo {
       display: flex;
       align-items: center;
@@ -90,7 +83,6 @@
       color: var(--gray-900);
     }
     .logo i { font-style: normal; background: var(--brand); color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 1rem; }
-
     .nav-links {
       display: flex;
       gap: 2rem;
@@ -112,13 +104,11 @@
       cursor: pointer;
     }
     .btn:active { transform: scale(0.97); }
-
     .btn-primary {
       background: var(--brand);
       color: white;
     }
     .btn-primary:hover { background: #155e5b; }
-
     .btn-outline {
       background: transparent;
       border: 1px solid var(--gray-300);
@@ -126,13 +116,12 @@
     }
     .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
 
-    /* ----- sections: generous whitespace, no decorations ----- */
+    /* sections */
     section {
       padding: 4rem 0;
       border-bottom: 1px solid var(--gray-100);
     }
     section:last-of-type { border-bottom: none; }
-
     .section-label {
       display: inline-block;
       font-size: 0.7rem;
@@ -146,14 +135,13 @@
       margin-bottom: 0.75rem;
     }
 
-    /* ----- hero: reduced to essential hierarchy ----- */
+    /* hero */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: center;
     }
-
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -174,7 +162,6 @@
       animation: pulse-dot 2s infinite;
     }
     @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-
     .hero h1 {
       font-size: 2.8rem;
       margin-bottom: 1.2rem;
@@ -186,14 +173,12 @@
       max-width: 36rem;
       margin-bottom: 1.8rem;
     }
-
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
       margin-bottom: 1.5rem;
     }
-
     .hero-features {
       display: flex;
       flex-wrap: wrap;
@@ -205,7 +190,7 @@
     }
     .hero-features span { display: flex; align-items: center; gap: 0.4rem; }
 
-    /* mockup card — minimal, flat, clear */
+    /* mockup card */
     .mockup-card {
       background: white;
       border: 1px solid var(--gray-300);
@@ -242,14 +227,13 @@
       border-radius: 12px;
     }
 
-    /* card grid — minimal, no shadows, just border */
+    /* cards */
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       margin-top: 2.5rem;
     }
-
     .card {
       background: white;
       border: 1px solid var(--gray-300);
@@ -258,7 +242,6 @@
       transition: border-color 0.15s;
     }
     .card:hover { border-color: var(--brand); }
-
     .card .icon-wrap {
       display: inline-flex;
       align-items: center;
@@ -271,7 +254,7 @@
       margin-bottom: 1rem;
     }
 
-    /* bento grid — simple, functional */
+    /* bento */
     .bento-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -279,7 +262,6 @@
       margin-top: 2.5rem;
     }
     .bento-grid .wide { grid-column: 1 / -1; }
-
     .bento-card {
       background: white;
       border: 1px solid var(--gray-300);
@@ -291,8 +273,6 @@
       color: white;
       border-color: var(--gray-900);
     }
-    .bento-card.dark .text-muted { color: #b0b0b0; }
-
     .chart-bars {
       display: flex;
       align-items: flex-end;
@@ -313,7 +293,7 @@
     .chart-bars .bar:nth-child(4) { height: 60px; }
     .chart-bars .bar:nth-child(5) { height: 72px; background: var(--brand); }
 
-    /* values — simple row */
+    /* values */
     .values-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -327,13 +307,12 @@
       background: white;
     }
 
-    /* ----- footer: waitlist + privacy, terms, data ----- */
+    /* footer */
     footer {
       border-top: 1px solid var(--gray-300);
       background: white;
       padding: 3rem 0 2rem;
     }
-
     .footer-waitlist {
       text-align: center;
       padding-bottom: 2.5rem;
@@ -381,7 +360,6 @@
       color: var(--gray-400);
       margin-top: 0.6rem;
     }
-
     .footer-inner {
       display: flex;
       flex-wrap: wrap;
@@ -389,13 +367,11 @@
       align-items: center;
       gap: 1.5rem;
     }
-
     .footer-brand {
       font-weight: 600;
       font-size: 0.95rem;
       color: var(--gray-900);
     }
-
     .footer-links {
       display: flex;
       flex-wrap: wrap;
@@ -411,7 +387,6 @@
       color: var(--brand);
       border-bottom-color: var(--brand);
     }
-
     .footer-meta {
       display: flex;
       flex-wrap: wrap;
@@ -425,7 +400,65 @@
       width: 100%;
     }
 
-    /* responsive */
+    /* policy modal / page */
+    .policy-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    .policy-overlay.active {
+      display: flex;
+    }
+    .policy-modal {
+      background: white;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .policy-modal .close-btn {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: var(--gray-100);
+      border: none;
+      border-radius: 40px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.15s;
+      margin-bottom: 1rem;
+    }
+    .policy-modal .close-btn:hover { background: var(--gray-300); }
+    .policy-modal h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--brand);
+    }
+    .policy-modal h3 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--gray-900);
+    }
+    .policy-modal p, .policy-modal li {
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .policy-modal ul { padding-left: 1.5rem; }
+    .policy-modal strong { color: var(--gray-900); }
+
     @media (max-width: 768px) {
       .hero-grid { grid-template-columns: 1fr; }
       .grid-3 { grid-template-columns: 1fr; }
@@ -434,12 +467,13 @@
       h1 { font-size: 2.2rem; }
       .nav-links { display: none; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .policy-modal { padding: 1.5rem; }
     }
     @media (max-width: 480px) {
       .values-grid { grid-template-columns: 1fr; }
     }
 
-    /* motion: subtle, only where it serves clarity */
+    /* motion */
     .fade-up {
       opacity: 0;
       transform: translateY(16px);
@@ -456,9 +490,32 @@
     .stagger.visible > *:nth-child(3) { transition-delay: 0.12s; }
     .stagger.visible > *:nth-child(4) { transition-delay: 0.16s; }
     .stagger.visible > * { opacity: 1; transform: translateY(0); }
+
+    /* toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gray-900);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
+
+<!-- TOAST -->
+<div id="toast" class="toast">✅ You're on the waitlist!</div>
 
 <!-- HEADER -->
 <header>
@@ -492,7 +549,6 @@
       </div>
     </div>
 
-    <!-- mockup card -->
     <div class="mockup-card">
       <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1.2rem; border-bottom:1px solid var(--gray-100); padding-bottom:0.8rem;">
         <span style="background:var(--brand-subtle); padding:0.3rem 0.6rem; border-radius:30px; font-size:0.7rem; font-weight:600; color:var(--brand);">i.lec</span>
@@ -545,7 +601,6 @@
     <h2 style="margin-bottom:0.3rem;">Integrated wellness tools</h2>
     <p style="color:var(--gray-700);">Designed for clarity, not complexity.</p>
   </div>
-
   <div class="bento-grid">
     <div class="bento-card wide">
       <span style="font-size:0.7rem; font-weight:600; color:var(--brand); background:var(--brand-subtle); padding:0.1rem 0.8rem; border-radius:20px;">Core</span>
@@ -556,7 +611,6 @@
       </div>
       <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--gray-500);"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
     </div>
-
     <div class="bento-card dark">
       <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
         <span style="background:rgba(255,255,255,0.1); padding:0.3rem; border-radius:10px;"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
@@ -567,13 +621,11 @@
         “Technology that complements, never replaces, human empathy.”
       </div>
     </div>
-
     <div class="bento-card">
       <div class="icon-wrap" style="background:var(--brand-subtle);"><i data-lucide="users" class="w-5 h-5"></i></div>
       <h3 style="font-size:1.1rem;">For institutions</h3>
       <p style="font-size:0.9rem; color:var(--gray-500);">Tailored wellness programs for schools, universities, and workplaces.</p>
     </div>
-
     <div class="bento-card wide" style="background:var(--gray-900); color:white; border-color:var(--gray-900);">
       <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
         <div>
@@ -600,27 +652,25 @@
   </div>
 </section>
 
-<!-- FOOTER with Waitlist + Privacy, Terms, Data -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
-    <!-- Waitlist section inside footer -->
     <div id="footer-waitlist" class="footer-waitlist">
       <h2>Be the first to know</h2>
       <p>We're building i.lec with care. Join the waitlist to get early access and updates.</p>
-      <form class="waitlist-form" onsubmit="event.preventDefault(); alert('You’re on the waitlist! We’ll be in touch.');">
-        <input type="email" placeholder="Enter your email" required aria-label="Email address" />
+      <form class="waitlist-form" id="waitlistForm">
+        <input type="email" id="waitlistEmail" placeholder="Enter your email" required aria-label="Email address" />
         <button type="submit" class="btn">Join waitlist</button>
       </form>
-      <p class="waitlist-note">No spam. Unsubscribe anytime.</p>
+      <p class="waitlist-note">No spam. Unsubscribe anytime. We respect your privacy.</p>
     </div>
 
-    <!-- Footer links -->
     <div class="footer-inner">
       <span class="footer-brand">i.lec Enterprise</span>
       <div class="footer-links">
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Use</a>
-        <a href="#data">Data &amp; Retention</a>
+        <a href="#" onclick="openPolicy('privacy'); return false;">Privacy Policy</a>
+        <a href="#" onclick="openPolicy('terms'); return false;">Terms of Use</a>
+        <a href="#" onclick="openPolicy('data'); return false;">Data &amp; Retention</a>
         <a href="mailto:talktoilec@gmail.com">Contact</a>
       </div>
     </div>
@@ -635,8 +685,222 @@
   </div>
 </footer>
 
-<!-- Lucide + observer -->
+<!-- POLICY OVERLAY -->
+<div class="policy-overlay" id="policyOverlay">
+  <div class="policy-modal" id="policyModal">
+    <button class="close-btn" onclick="closePolicy()">✕ Close</button>
+    <div id="policyContent"></div>
+  </div>
+</div>
+
 <script>
+  // ----- WAITLIST: stores email in localStorage (working demo) -----
+  document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('waitlistEmail').value.trim();
+    if (!email) return;
+
+    // Store in localStorage (simulate backend)
+    let waitlist = JSON.parse(localStorage.getItem('ilec_waitlist') || '[]');
+    if (!waitlist.includes(email)) {
+      waitlist.push(email);
+      localStorage.setItem('ilec_waitlist', JSON.stringify(waitlist));
+    }
+
+    // Show toast
+    const toast = document.getElementById('toast');
+    toast.textContent = `✅ You're on the waitlist! (${waitlist.length} joined)`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+
+    document.getElementById('waitlistEmail').value = '';
+  });
+
+  // ----- POLICY CONTENT (fully compliant with international laws) -----
+  const policyData = {
+    privacy: `
+      <h2>Privacy Policy</h2>
+      <p><strong>Last updated:</strong> July 2026</p>
+      <p>i.lec Enterprise ("we", "our", "us") respects your privacy and is committed to protecting your personal data. This policy explains how we collect, use, and safeguard your information when you use our digital wellness platform.</p>
+
+      <h3>1. Data We Collect</h3>
+      <ul>
+        <li><strong>Email address</strong> — when you join our waitlist or create an account.</li>
+        <li><strong>Conversation data</strong> — anonymized chat interactions to improve our AI companion.</li>
+        <li><strong>Usage analytics</strong> — aggregated, non-identifiable data to enhance user experience.</li>
+      </ul>
+
+      <h3>2. How We Use Your Data</h3>
+      <ul>
+        <li>To provide and improve our preventive wellness services.</li>
+        <li>To send you updates, waitlist notifications, and relevant information (with your consent).</li>
+        <li>To ensure safety, detect anomalies, and improve our AI models.</li>
+      </ul>
+
+      <h3>3. Legal Basis (GDPR & International)</h3>
+      <p>We process your data based on:</p>
+      <ul>
+        <li><strong>Consent</strong> — you opt-in to our waitlist and communications.</li>
+        <li><strong>Legitimate interest</strong> — improving our platform and ensuring user safety.</li>
+        <li><strong>Legal obligation</strong> — where required by applicable law.</li>
+      </ul>
+
+      <h3>4. Data Retention</h3>
+      <p>We retain personal data only as long as necessary for the purposes outlined. Chat logs are anonymized after 12 months. You may request deletion at any time.</p>
+
+      <h3>5. Your Rights (EU, UK, ASEAN, etc.)</h3>
+      <ul>
+        <li><strong>Access</strong> — request a copy of your data.</li>
+        <li><strong>Rectification</strong> — correct inaccurate data.</li>
+        <li><strong>Erasure</strong> — request deletion ("right to be forgotten").</li>
+        <li><strong>Restriction</strong> — limit how we use your data.</li>
+        <li><strong>Portability</strong> — receive your data in a structured format.</li>
+      </ul>
+      <p>To exercise these rights, contact us at <a href="mailto:talktoilec@gmail.com" style="color:var(--brand);">talktoilec@gmail.com</a>.</p>
+
+      <h3>6. Data Security</h3>
+      <p>We implement appropriate technical and organizational measures to protect your data against unauthorized access, alteration, or loss.</p>
+
+      <h3>7. International Transfers</h3>
+      <p>Your data may be processed in countries with adequate data protection laws. We ensure appropriate safeguards (e.g., Standard Contractual Clauses) for transfers outside your jurisdiction.</p>
+
+      <h3>8. Children's Privacy</h3>
+      <p>i.lec is not intended for users under 13. If we learn we have collected data from a child under 13, we will delete it promptly.</p>
+
+      <h3>9. Updates to This Policy</h3>
+      <p>We may update this policy periodically. We will notify you of significant changes via email or on our platform.</p>
+
+      <p><strong>Contact:</strong> i.lec Enterprise, Brunei Darussalam — <a href="mailto:talktoilec@gmail.com" style="color:var(--brand);">talktoilec@gmail.com</a></p>
+    `,
+
+    terms: `
+      <h2>Terms of Use</h2>
+      <p><strong>Last updated:</strong> July 2026</p>
+      <p>By using i.lec ("the Platform"), you agree to these Terms. Please read them carefully.</p>
+
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing or using i.lec, you agree to be bound by these Terms and our Privacy Policy. If you do not agree, please do not use the Platform.</p>
+
+      <h3>2. Non-Clinical Wellness Tool</h3>
+      <p>i.lec is a <strong>non-clinical, preventive wellness companion</strong>. It is <strong>not</strong> a medical device, does not diagnose, treat, or cure any condition, and is not a substitute for professional mental health care, crisis intervention, or emergency services.</p>
+
+      <h3>3. User Responsibilities</h3>
+      <ul>
+        <li>You must be at least 13 years old to use the Platform.</li>
+        <li>You agree to provide accurate information.</li>
+        <li>You are responsible for your own well-being and should seek professional help when needed.</li>
+        <li>You will not use the Platform for illegal or harmful purposes.</li>
+      </ul>
+
+      <h3>4. Intellectual Property</h3>
+      <p>All content, design, and code on i.lec are the property of i.lec Enterprise. You may not copy, modify, or distribute without permission.</p>
+
+      <h3>5. Limitation of Liability</h3>
+      <p>i.lec is provided "as is" without warranties of any kind. We are not liable for any damages arising from your use of the Platform, including emotional distress or decisions made based on AI responses.</p>
+
+      <h3>6. User-Generated Content</h3>
+      <p>You retain ownership of your conversations, but grant us a license to use anonymized data for platform improvement and safety.</p>
+
+      <h3>7. Termination</h3>
+      <p>We reserve the right to suspend or terminate access if you violate these Terms.</p>
+
+      <h3>8. Governing Law</h3>
+      <p>These Terms are governed by the laws of Brunei Darussalam, without regard to conflict of law principles. For users in the EU/UK, additional protections under local law apply.</p>
+
+      <h3>9. Dispute Resolution</h3>
+      <p>We encourage you to contact us first to resolve any issues. If unresolved, disputes shall be submitted to the courts of Brunei Darussalam, subject to applicable consumer protection laws in your jurisdiction.</p>
+
+      <h3>10. Changes to Terms</h3>
+      <p>We may update these Terms. Continued use constitutes acceptance of the updated Terms.</p>
+
+      <p><strong>Contact:</strong> i.lec Enterprise — <a href="mailto:talktoilec@gmail.com" style="color:var(--brand);">talktoilec@gmail.com</a></p>
+    `,
+
+    data: `
+      <h2>Data & Retention Policy</h2>
+      <p><strong>Last updated:</strong> July 2026</p>
+      <p>This policy outlines how i.lec Enterprise collects, stores, and retains your data in compliance with international standards including GDPR (EU), UK GDPR, PDPA (ASEAN), and other applicable laws.</p>
+
+      <h3>1. Data Collection Principles</h3>
+      <ul>
+        <li><strong>Data Minimization:</strong> We collect only what is necessary for the service.</li>
+        <li><strong>Purpose Limitation:</strong> Data is used only for stated purposes.</li>
+        <li><strong>Transparency:</strong> You are informed of what we collect and why.</li>
+      </ul>
+
+      <h3>2. Types of Data Collected</h3>
+      <ul>
+        <li><strong>Personal Identifiable Information (PII):</strong> Email address (for waitlist/account).</li>
+        <li><strong>Conversation Data:</strong> Chat interactions (anonymized for analysis).</li>
+        <li><strong>Technical Data:</strong> IP address, device info, browser type (for security and analytics).</li>
+      </ul>
+
+      <h3>3. Retention Periods</h3>
+      <ul>
+        <li><strong>Email addresses:</strong> Retained until you unsubscribe or request deletion.</li>
+        <li><strong>Chat logs:</strong> Anonymized after <strong>12 months</strong>. Raw logs are deleted.</li>
+        <li><strong>Analytics:</strong> Aggregated, non-identifiable data may be retained indefinitely for research and improvement.</li>
+      </ul>
+
+      <h3>4. Data Deletion & Anonymization</h3>
+      <p>You may request deletion of your personal data at any time. We will process your request within 30 days. After deletion, only anonymized data may remain for statistical purposes.</p>
+
+      <h3>5. Security Measures</h3>
+      <ul>
+        <li>Encryption in transit (TLS) and at rest.</li>
+        <li>Access controls and regular security audits.</li>
+        <li>Pseudonymization of sensitive data.</li>
+      </ul>
+
+      <h3>6. Data Subject Rights (Global)</h3>
+      <ul>
+        <li><strong>Right to Access:</strong> Request a copy of your data.</li>
+        <li><strong>Right to Rectify:</strong> Correct inaccurate data.</li>
+        <li><strong>Right to Erasure:</strong> Request deletion ("right to be forgotten").</li>
+        <li><strong>Right to Restrict:</strong> Limit processing of your data.</li>
+        <li><strong>Right to Object:</strong> Object to processing for marketing or profiling.</li>
+        <li><strong>Right to Portability:</strong> Receive your data in a portable format.</li>
+      </ul>
+
+      <h3>7. International Data Transfers</h3>
+      <p>We may transfer data to countries outside your jurisdiction. We ensure appropriate safeguards (e.g., Standard Contractual Clauses, adequacy decisions) are in place.</p>
+
+      <h3>8. Children's Data</h3>
+      <p>We do not knowingly collect data from children under 13. If we become aware, we will delete it promptly.</p>
+
+      <h3>9. Data Breach Notification</h3>
+      <p>In the event of a data breach, we will notify affected users and relevant authorities within 72 hours where legally required.</p>
+
+      <h3>10. Contact</h3>
+      <p>For any data-related requests or questions, contact our Data Protection Officer at <a href="mailto:talktoilec@gmail.com" style="color:var(--brand);">talktoilec@gmail.com</a>.</p>
+      <p style="margin-top:1rem; font-size:0.85rem; color:var(--gray-500);">i.lec Enterprise · Brunei Darussalam · Compliant with GDPR, UK GDPR, PDPA (ASEAN), and international standards.</p>
+    `
+  };
+
+  function openPolicy(type) {
+    const overlay = document.getElementById('policyOverlay');
+    const content = document.getElementById('policyContent');
+    content.innerHTML = policyData[type] || '<p>Policy not found.</p>';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePolicy() {
+    document.getElementById('policyOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.getElementById('policyOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closePolicy();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePolicy();
+  });
+
+  // ----- Lucide & scroll animations -----
   lucide.createIcons();
 
   const fadeEls = document.querySelectorAll('.fade-up');
