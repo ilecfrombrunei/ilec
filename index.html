@@ -107,15 +107,18 @@
       border-radius: 40px;
       font-weight: 500;
       font-size: 0.85rem;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s, transform 0.1s;
       border: none;
       cursor: pointer;
     }
+    .btn:active { transform: scale(0.97); }
+
     .btn-primary {
       background: var(--brand);
       color: white;
     }
     .btn-primary:hover { background: #155e5b; }
+
     .btn-outline {
       background: transparent;
       border: 1px solid var(--gray-300);
@@ -324,29 +327,102 @@
       background: white;
     }
 
-    /* cta — minimal, no gradient, just solid */
-    .cta-section {
-      background: var(--brand);
-      color: white;
-      padding: 4rem 0;
-      text-align: center;
-    }
-    .cta-section .btn-primary {
-      background: white;
-      color: var(--brand);
-    }
-    .cta-section .btn-primary:hover { background: #f0f0f0; }
-
-    /* footer */
+    /* ----- footer: waitlist + privacy, terms, data ----- */
     footer {
       border-top: 1px solid var(--gray-300);
-      padding: 2rem 0;
+      background: white;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-waitlist {
+      text-align: center;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--gray-100);
+      margin-bottom: 2rem;
+    }
+    .footer-waitlist h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .footer-waitlist p {
+      color: var(--gray-500);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .waitlist-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .waitlist-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--gray-300);
+      border-radius: 40px;
+      background: white;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .waitlist-form input:focus { border-color: var(--brand); }
+    .waitlist-form .btn {
+      background: var(--brand);
+      color: white;
+      padding: 0.6rem 1.6rem;
+    }
+    .waitlist-form .btn:hover { background: #155e5b; }
+    .waitlist-note {
+      font-size: 0.7rem;
+      color: var(--gray-400);
+      margin-top: 0.6rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--gray-900);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
       font-size: 0.8rem;
       color: var(--gray-500);
+    }
+    .footer-links a {
+      transition: color 0.15s;
+      border-bottom: 1px solid transparent;
+    }
+    .footer-links a:hover {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+    }
+
+    .footer-meta {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.8rem 1.8rem;
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      margin-top: 1.2rem;
+      border-top: 1px solid var(--gray-100);
+      padding-top: 1.2rem;
+      justify-content: space-between;
+      width: 100%;
     }
 
     /* responsive */
@@ -357,6 +433,7 @@
       .values-grid { grid-template-columns: 1fr 1fr; }
       h1 { font-size: 2.2rem; }
       .nav-links { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) {
       .values-grid { grid-template-columns: 1fr; }
@@ -379,15 +456,11 @@
     .stagger.visible > *:nth-child(3) { transition-delay: 0.12s; }
     .stagger.visible > *:nth-child(4) { transition-delay: 0.16s; }
     .stagger.visible > * { opacity: 1; transform: translateY(0); }
-
-    /* small interactive touch on buttons */
-    .btn { transition: background 0.15s, border-color 0.15s, transform 0.1s; }
-    .btn:active { transform: scale(0.97); }
   </style>
 </head>
 <body>
 
-<!-- HEADER — minimal, functional -->
+<!-- HEADER -->
 <header>
   <div class="container nav-inner">
     <div class="logo"><i>i</i> .lec</div>
@@ -395,13 +468,13 @@
       <a href="#about">About</a>
       <a href="#platform">Platform</a>
       <a href="#values">Values</a>
-      <a href="#contact">Contact</a>
+      <a href="#footer-waitlist">Waitlist</a>
     </nav>
-    <a href="#contact" class="btn btn-primary" style="padding:0.45rem 1.2rem; font-size:0.8rem;">Get started</a>
+    <a href="#footer-waitlist" class="btn btn-primary" style="padding:0.45rem 1.2rem; font-size:0.8rem;">Join waitlist</a>
   </div>
 </header>
 
-<!-- HERO — clear, no ornament -->
+<!-- HERO -->
 <section class="container hero" style="padding-top:3rem; padding-bottom:3rem;">
   <div class="hero-grid">
     <div class="fade-up visible">
@@ -409,7 +482,7 @@
       <h1>Here for your <span class="text-brand">healing</span>,<br>not just your hustle.</h1>
       <p>i.lec is an independent, AI‑powered preventive mental wellbeing project — a private digital space to express everyday stress, reflect, and connect with appropriate support.</p>
       <div class="hero-actions">
-        <a href="#platform" class="btn btn-primary">Explore platform</a>
+        <a href="#footer-waitlist" class="btn btn-primary">Join waitlist</a>
         <a href="https://instagram.com/ilec.bn" target="_blank" class="btn btn-outline">@ilec.bn</a>
       </div>
       <div class="hero-features">
@@ -419,7 +492,7 @@
       </div>
     </div>
 
-    <!-- mockup card — flat, informative -->
+    <!-- mockup card -->
     <div class="mockup-card">
       <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1.2rem; border-bottom:1px solid var(--gray-100); padding-bottom:0.8rem;">
         <span style="background:var(--brand-subtle); padding:0.3rem 0.6rem; border-radius:30px; font-size:0.7rem; font-weight:600; color:var(--brand);">i.lec</span>
@@ -439,7 +512,7 @@
   </div>
 </section>
 
-<!-- ABOUT — simple 3‑col -->
+<!-- ABOUT -->
 <section id="about" class="container" style="border-bottom:1px solid var(--gray-100);">
   <div class="fade-up">
     <span class="section-label">The challenge</span>
@@ -465,7 +538,7 @@
   </div>
 </section>
 
-<!-- PLATFORM — bento style, minimal -->
+<!-- PLATFORM -->
 <section id="platform" class="container" style="border-bottom:1px solid var(--gray-100);">
   <div class="fade-up">
     <span class="section-label">Platform</span>
@@ -474,7 +547,6 @@
   </div>
 
   <div class="bento-grid">
-    <!-- wide card -->
     <div class="bento-card wide">
       <span style="font-size:0.7rem; font-weight:600; color:var(--brand); background:var(--brand-subtle); padding:0.1rem 0.8rem; border-radius:20px;">Core</span>
       <h3 style="margin-top:0.8rem; font-size:1.3rem;">Stress &amp; mood analytics</h3>
@@ -485,7 +557,6 @@
       <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--gray-500);"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
     </div>
 
-    <!-- dark card -->
     <div class="bento-card dark">
       <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
         <span style="background:rgba(255,255,255,0.1); padding:0.3rem; border-radius:10px;"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
@@ -497,27 +568,25 @@
       </div>
     </div>
 
-    <!-- small card -->
     <div class="bento-card">
       <div class="icon-wrap" style="background:var(--brand-subtle);"><i data-lucide="users" class="w-5 h-5"></i></div>
       <h3 style="font-size:1.1rem;">For institutions</h3>
       <p style="font-size:0.9rem; color:var(--gray-500);">Tailored wellness programs for schools, universities, and workplaces.</p>
     </div>
 
-    <!-- wide cta card -->
     <div class="bento-card wide" style="background:var(--gray-900); color:white; border-color:var(--gray-900);">
       <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
         <div>
           <h3 style="font-size:1.2rem;">Bridge to clinical care</h3>
           <p style="color:#b0b0b0; font-size:0.9rem; max-width:24rem;">Empowering self‑awareness while guiding toward professional support.</p>
         </div>
-        <a href="mailto:talktoilec@gmail.com" class="btn" style="background:white; color:var(--gray-900); border-radius:40px; padding:0.5rem 1.6rem; font-weight:500;">Partner with us</a>
+        <a href="#footer-waitlist" class="btn" style="background:white; color:var(--gray-900); border-radius:40px; padding:0.5rem 1.6rem; font-weight:500;">Join waitlist</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES — 4 columns, direct -->
+<!-- VALUES -->
 <section id="values" class="container" style="border-bottom:1px solid var(--gray-100);">
   <div class="fade-up">
     <span class="section-label">Principles</span>
@@ -531,25 +600,39 @@
   </div>
 </section>
 
-<!-- CTA — simple, solid -->
-<section id="contact" class="cta-section">
-  <div class="container" style="max-width:48rem;">
-    <h2 style="font-size:2rem; font-weight:600; margin-bottom:0.5rem;">Start a conversation</h2>
-    <p style="opacity:0.8; margin-bottom:1.8rem;">Whether you're an institution or an individual — we're here to help.</p>
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.8rem;">
-      <a href="mailto:talktoilec@gmail.com" class="btn btn-primary" style="background:white; color:var(--brand);">Contact team</a>
-      <a href="https://instagram.com/ilec.bn" target="_blank" class="btn" style="background:rgba(255,255,255,0.12); color:white; border:1px solid rgba(255,255,255,0.2);">@ilec.bn</a>
+<!-- FOOTER with Waitlist + Privacy, Terms, Data -->
+<footer>
+  <div class="container">
+    <!-- Waitlist section inside footer -->
+    <div id="footer-waitlist" class="footer-waitlist">
+      <h2>Be the first to know</h2>
+      <p>We're building i.lec with care. Join the waitlist to get early access and updates.</p>
+      <form class="waitlist-form" onsubmit="event.preventDefault(); alert('You’re on the waitlist! We’ll be in touch.');">
+        <input type="email" placeholder="Enter your email" required aria-label="Email address" />
+        <button type="submit" class="btn">Join waitlist</button>
+      </form>
+      <p class="waitlist-note">No spam. Unsubscribe anytime.</p>
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-inner">
+      <span class="footer-brand">i.lec Enterprise</span>
+      <div class="footer-links">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Use</a>
+        <a href="#data">Data &amp; Retention</a>
+        <a href="mailto:talktoilec@gmail.com">Contact</a>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 i.lec Enterprise · Brunei Darussalam</span>
+      <span style="display:flex; gap:1.2rem;">
+        <a href="https://instagram.com/ilec.bn" target="_blank" style="display:flex; align-items:center; gap:0.3rem;"><i class="iconoir-instagram" style="font-size:0.9rem;"></i> @ilec.bn</a>
+        <span>·</span>
+        <span style="font-size:0.7rem; color:var(--gray-400);">Project disclaimer: non‑clinical, in development</span>
+      </span>
     </div>
   </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="container">
-  <span>© 2026 i.lec Enterprise · Brunei Darussalam</span>
-  <span style="display:flex; gap:1.2rem;">
-    <a href="mailto:talktoilec@gmail.com" style="display:flex; align-items:center; gap:0.3rem;"><i class="iconoir-mail" style="font-size:0.9rem;"></i> talktoilec@gmail.com</a>
-    <a href="https://instagram.com/ilec.bn" target="_blank" style="display:flex; align-items:center; gap:0.3rem;"><i class="iconoir-instagram" style="font-size:0.9rem;"></i> @ilec.bn</a>
-  </span>
 </footer>
 
 <!-- Lucide + observer -->
