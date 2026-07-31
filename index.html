@@ -337,7 +337,7 @@
       max-width: 420px;
       margin: 0 auto;
     }
-    .waitlist-form input {
+    .waitlist-form input[type="email"] {
       flex: 1;
       min-width: 200px;
       padding: 0.6rem 1.2rem;
@@ -348,18 +348,40 @@
       outline: none;
       transition: border-color 0.15s;
     }
-    .waitlist-form input:focus { border-color: var(--brand); }
+    .waitlist-form input[type="email"]:focus { border-color: var(--brand); }
     .waitlist-form .btn {
       background: var(--brand);
       color: white;
       padding: 0.6rem 1.6rem;
     }
     .waitlist-form .btn:hover { background: #155e5b; }
+    .waitlist-consent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      margin: 0.5rem 0;
+    }
+    .waitlist-consent input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--brand);
+      cursor: pointer;
+    }
+    .waitlist-consent a {
+      color: var(--brand);
+      text-decoration: underline;
+      cursor: pointer;
+    }
     .waitlist-note {
       font-size: 0.7rem;
       color: var(--gray-400);
       margin-top: 0.6rem;
     }
+
     .footer-inner {
       display: flex;
       flex-wrap: wrap;
@@ -382,6 +404,7 @@
     .footer-links a {
       transition: color 0.15s;
       border-bottom: 1px solid transparent;
+      cursor: pointer;
     }
     .footer-links a:hover {
       color: var(--brand);
@@ -661,6 +684,10 @@
       <form class="waitlist-form" id="waitlistForm">
         <input type="email" id="waitlistEmail" placeholder="Enter your email" required aria-label="Email address" />
         <button type="submit" class="btn">Join waitlist</button>
+        <div class="waitlist-consent">
+          <input type="checkbox" id="privacyConsent" required />
+          <label for="privacyConsent">I agree to the <a href="#" onclick="openPolicy('privacy'); return false;">Privacy Policy</a> and <a href="#" onclick="openPolicy('terms'); return false;">Terms of Use</a></label>
+        </div>
       </form>
       <p class="waitlist-note">No spam. Unsubscribe anytime. We respect your privacy.</p>
     </div>
@@ -694,11 +721,20 @@
 </div>
 
 <script>
-  // ----- WAITLIST: stores email in localStorage (working demo) -----
+  // ========== WAITLIST: stores in localStorage (working demo) ==========
   document.getElementById('waitlistForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('waitlistEmail').value.trim();
-    if (!email) return;
+    const consent = document.getElementById('privacyConsent').checked;
+
+    if (!email) {
+      alert('Please enter your email address.');
+      return;
+    }
+    if (!consent) {
+      alert('Please agree to the Privacy Policy and Terms of Use to join.');
+      return;
+    }
 
     // Store in localStorage (simulate backend)
     let waitlist = JSON.parse(localStorage.getItem('ilec_waitlist') || '[]');
@@ -707,16 +743,17 @@
       localStorage.setItem('ilec_waitlist', JSON.stringify(waitlist));
     }
 
-    // Show toast
+    // Show toast with count
     const toast = document.getElementById('toast');
     toast.textContent = `✅ You're on the waitlist! (${waitlist.length} joined)`;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
+    setTimeout(() => toast.classList.remove('show'), 3500);
 
     document.getElementById('waitlistEmail').value = '';
+    document.getElementById('privacyConsent').checked = false;
   });
 
-  // ----- POLICY CONTENT (fully compliant with international laws) -----
+  // ========== POLICY CONTENT (fully compliant with international laws) ==========
   const policyData = {
     privacy: `
       <h2>Privacy Policy</h2>
@@ -900,7 +937,7 @@
     if (e.key === 'Escape') closePolicy();
   });
 
-  // ----- Lucide & scroll animations -----
+  // ========== Lucide & scroll animations ==========
   lucide.createIcons();
 
   const fadeEls = document.querySelectorAll('.fade-up');
